@@ -39,8 +39,8 @@ const Player = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // position: 'absolute',
-    // top: -75,
+    position: 'absolute',
+    top: -75,
     width: '100%',
     height: 75,
     padding: 10,
