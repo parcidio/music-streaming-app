@@ -1,17 +1,18 @@
 import { StyleSheet, FlatList } from 'react-native';
 
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
+import { View } from '../../components/Themed';
 import {tracks}  from '../../../assets/data/tracks'
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
 import TrackListItem from '../../../src/components/TrackListItem';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function HomeScreen() {
   return (
+  
     <View style={styles.container}>
-      <FlatList data={tracks} renderItem={({item})=><TrackListItem track={item}/>}/>
+      <FlatList data={tracks} renderItem={({item})=><TrackListItem track={item}/>} showsVerticalScrollIndicator={true}/>
     </View>
+
   );
 }
 

@@ -58,10 +58,10 @@ export default function TabLayout() {
       />
       <Tabs.Screen
         name="downloads"
-        
         options={{
           title: 'Downloads',
-          headerShown: false,
+          headerShown: false,         
+          
           tabBarIcon: ({ color }) => <TabBarIcon name="download" color={color} />,
         }}
       /><Tabs.Screen

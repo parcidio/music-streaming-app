@@ -1,31 +1,61 @@
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
+import React, { useState } from 'react';
+import { FlatList, StyleSheet, TextInput, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import TrackListItem from '@/src/components/TrackListItem';
+import { tracks } from '@/assets/data/tracks';
 
 export default function SearchScreen() {
+  const [search, setSearch] = useState('');
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Library</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <FontAwesome name="search" size={16} color="gray" />
+        <TextInput
+          value={search}
+          placeholder="What do you want to listen to?"
+          placeholderTextColor="gray"
+          onChangeText={setSearch}
+          style={styles.input}
+        />
+        {search.length > 0 && (
+          <Text onPress={() => setSearch('')} style={styles.cancelText}>
+            Cancel
+          </Text>
+        )}
+      </View>
+
+      <FlatList
+        data={tracks}
+        renderItem={({ item }) => <TrackListItem track={item} />}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  header: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    marginHorizontal: 20,
+    marginVertical: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    paddingHorizontal: 10,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  input: {
+    flex: 1,
+    marginHorizontal: 10,
+    fontSize: 16,
+    paddingVertical: 8,
+    color: 'black',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  cancelText: {
+    color: 'blue',
+    marginLeft: 10,
   },
 });
