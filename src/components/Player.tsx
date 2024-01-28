@@ -4,13 +4,13 @@ import { usePlayerContext } from '../providers/PlayerProvider';
 
 const Player = () => {
 
-    const { track } = usePlayerContext();
+    const { currentTrack } = usePlayerContext();
 
-  if (!track) {
+  if (!currentTrack) {
     return null;
   }
 
-  const image = track.album.images?.[0];
+  const image = currentTrack.album.images?.[0];
 
   return (
     <View style={styles.container}>
@@ -18,8 +18,8 @@ const Player = () => {
         {image && <Image source={{ uri: image.url }} style={styles.image} />}
 
         <View style={{ flex: 1 }}>
-          <Text style={styles.title}>{track.name}</Text>
-          <Text style={styles.subtitle}>{track.artists[0]?.name}</Text>
+          <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{currentTrack.name}</Text>
+          <Text style={styles.subtitle} numberOfLines={1} ellipsizeMode="tail">{currentTrack.artists[0]?.name}</Text>
         </View>
 
         <Ionicons
@@ -29,10 +29,10 @@ const Player = () => {
           style={{ marginHorizontal: 10 }}
         />
         <Ionicons
-          disabled={!track?.preview_url}
+          disabled={!currentTrack?.preview_url}
           name={'play'}
           size={22}
-          color={track?.preview_url ? 'white' : 'gray'}
+          color={currentTrack?.preview_url ? 'white' : 'gray'}
         />
       </View>
     </View>

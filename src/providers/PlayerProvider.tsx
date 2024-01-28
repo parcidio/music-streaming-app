@@ -3,15 +3,15 @@ import { PlayerContextType, Track } from "@/assets/types";
 
 const PlayerContext = createContext<PlayerContextType>({
     // track is option based on the type declaration
-    setTrack: ()=>{},
+    setCurrentTrack: ()=>{},
 });
 
 export default function PlayerProvider({children} : PropsWithChildren){
-    const [track, setTrack] = useState<Track>();
+    const [currentTrack, setCurrentTrack] = useState<Track>();
 
-    console.log("Track: ", track);
+    console.log("Track: ", currentTrack);
     return(
-       < PlayerContext.Provider value={{track, setTrack}}>
+       < PlayerContext.Provider value={{currentTrack, setCurrentTrack}}>
        {children}
        </PlayerContext.Provider>
     )

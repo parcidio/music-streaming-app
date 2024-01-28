@@ -23,6 +23,6 @@ export type Image = {
 };
 
 export type PlayerContextType={
-  track?: Track;
-  setTrack: (track:Track)=> void;
+  currentTrack?: Track;
+  setCurrentTrack: (currentTrack:Track)=> void;
 }

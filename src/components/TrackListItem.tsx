@@ -8,12 +8,12 @@ type TrackListItemProps = {
 
 export default function TrackListItem ({track} : TrackListItemProps){
     const image = track.album?.images?.[0];
-    const { setTrack } = usePlayerContext();
+    const { currentTrack,setCurrentTrack } = usePlayerContext();
 
     return (
       <Pressable
-        onPress={() => setTrack(track)}
-        style={styles.container}
+        onPress={() => setCurrentTrack(track)}
+        style={track == currentTrack? styles.containerActive : styles.container}
       >
         {image && <Image source={{ uri: image.url }} style={styles.image} />}
         <View>
@@ -28,6 +28,15 @@ const styles = StyleSheet.create({
     container: {
       width: '100%',
       padding: 10,
+      gap: 5,
+      flexDirection: 'row',
+      alignItems: 'center',
+      
+    },
+    containerActive: {
+      width: '100%',
+      padding: 10,
+      backgroundColor: 'lightgray',
       gap: 5,
       flexDirection: 'row',
       alignItems: 'center',
