@@ -6,7 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
 import { useColorScheme } from '../components/useColorScheme';
-
+import PlayerProvider from '../providers/PlayerProvider';
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -49,10 +49,12 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <PlayerProvider>        
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
+      </PlayerProvider>
     </ThemeProvider>
   );
 }

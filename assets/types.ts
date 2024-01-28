@@ -21,3 +21,8 @@ export type Image = {
   height?: number;
   width?: number;
 };
+
+export type PlayerContextType={
+  track?: Track;
+  setTrack: (track:Track)=> void;
+}

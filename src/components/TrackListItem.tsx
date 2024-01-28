@@ -1,16 +1,18 @@
 
 import { Text, View, StyleSheet,  Pressable, Image } from 'react-native';
 import { Track } from '@/assets/types';
+import {usePlayerContext} from '../providers/PlayerProvider'
 type TrackListItemProps = {
     track: Track
 }
 
 export default function TrackListItem ({track} : TrackListItemProps){
     const image = track.album?.images?.[0];
+    const { setTrack } = usePlayerContext();
 
     return (
       <Pressable
-        onPress={() => console.log('Playing track: ', track.id)}
+        onPress={() => setTrack(track)}
         style={styles.container}
       >
         {image && <Image source={{ uri: image.url }} style={styles.image} />}
