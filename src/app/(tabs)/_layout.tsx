@@ -6,7 +6,7 @@ import { Pressable, View } from 'react-native';
 import Colors from '../../constants/Colors';
 import { useColorScheme } from '../../components/useColorScheme';
 import { useClientOnlyValue } from '../../components/useClientOnlyValue';
-import {BottomTabBar} from '@react-navigation/bottom-tabs'
+import { BottomTabBar } from '@react-navigation/bottom-tabs'
 import Player from '@/src/components/Player';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -27,33 +27,18 @@ export default function TabLayout() {
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
-        
       }}
-      tabBar={(props)=><View><Player/><BottomTabBar  {...props}/></View>} >
+      tabBar={(props) => <View><Player /><BottomTabBar  {...props} /></View>} >
       <Tabs.Screen
         name="index"
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
         }}
       />
       <Tabs.Screen
         name="search"
-        
+
         options={{
           title: 'Perquisa',
           headerShown: false,
@@ -64,19 +49,16 @@ export default function TabLayout() {
         name="downloads"
         options={{
           title: 'Downloads',
-          headerShown: false,         
-          
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="download" color={color} />,
         }}
       /><Tabs.Screen
-      name="library"
-      
-      options={{
-        title: 'Library',
-       
-        tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
-      }}
-    />
+        name="library"
+        options={{
+          title: 'Library',
+          tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
+        }}
+      />
     </Tabs>
   );
 }

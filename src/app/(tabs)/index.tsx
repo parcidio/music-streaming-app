@@ -2,7 +2,6 @@ import {
   StyleSheet,
   Text,
   View,
-  SafeAreaView,
   ScrollView,
   Image,
   Pressable,
@@ -19,44 +18,62 @@ import { useNavigation } from "@react-navigation/native";
 import { TrackListItemProps } from "@/assets/types";
 import { tracks } from '@/assets/data/tracks';
 import TrackListItem from "@/src/components/TrackListItem";
+import GenreCard from "@/src/components/Genre";
+import { Link } from "expo-router";
+import Colors from "@/src/constants/Colors";
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const HomeScreen = () => {
-  
+
   const [search, setSearch] = useState('');
- 
+  const genre = [
+    { title: 'Kizomba' },
+    { title: 'Semba' },
+    { title: 'Pop' },
+    { title: 'Jazz' },
+    { title: 'Rap' },
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
-    <View style={styles.header}>
-      <View style={styles.searchBar}>
-        <FontAwesome name="search" size={16} color="gray" />
-        <TextInput
-          value={search}
-          placeholder="What do you want to listen to?"
-          placeholderTextColor="gray"
-          onChangeText={setSearch}
-          style={styles.input}
-        />
+      <View style={styles.header}>
+        <View style={styles.searchBar}>
+          <FontAwesome name="search" size={16} color="gray" />
+          <TextInput
+            value={search}
+            placeholder="What do you want to listen to?"
+            placeholderTextColor="gray"
+            onChangeText={setSearch}
+            style={styles.input}
+          />
+        </View>
+        <Link href="/profile" asChild>
+          <Pressable>
+            {({ pressed }) => (
+              <Image
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 20,
+                  resizeMode: "cover",
+                }}
+                source={{ uri: tracks[0].album?.images?.[0].url }}
+              />
+            )}
+          </Pressable>
+        </Link>
+
       </View>
-        <Image
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 20,
-                resizeMode: "cover",
-              }}
-              source={{ uri: tracks[0].album?.images?.[0].url }}
-            />
-      </View>
-      <ScrollView>       
+      <ScrollView>
         <Text
           style={styles.heading}
         >
           Generos
         </Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {tracks.map((item, index) => (
-            <ArtistCard track={item} key={index} />
+          {genre.map((item) => (
+            <GenreCard title={item.title} />
           ))}
         </ScrollView>
 
@@ -76,18 +93,16 @@ const HomeScreen = () => {
         >
           Recently Played
         </Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {tracks.map((item, index) => (
+            <RecentlyPlayedCard track={item} key={index} />
+          ))}
+        </ScrollView>
+
         <FlatList
           data={tracks}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          renderItem={({ item, index }) => (
-            <RecentlyPlayedCard track={item} key={index} />
-          )}
+          renderItem={({ item }) => <TrackListItem track={item} />}
         />
-        <FlatList
-        data={tracks}
-        renderItem={({ item }) => <TrackListItem track={item} />}
-      />
       </ScrollView>
     </SafeAreaView>
   );
@@ -103,7 +118,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center'
-   
+
   },
   searchBar: {
     flex: 1,

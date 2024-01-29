@@ -30,3 +30,7 @@ export type PlayerContextType={
 export type TrackListItemProps = {
   track: Track
 }
+
+export type Genre = {
+  title: String
+}
