@@ -1,16 +1,67 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { usePlayerContext } from '../providers/PlayerProvider';
+import { useEffect, useState } from 'react';
+import {AVPlaybackStatus, Audio} from 'expo-av'
+import { Sound } from 'expo-av/build/Audio';
 
 const Player = () => {
-
     const { currentTrack } = usePlayerContext();
 
-  if (!currentTrack) {
-    return null;
-  }
+    if (!currentTrack) {
+        return null;
+    }
 
-  const image = currentTrack.album.images?.[0];
+    const image = currentTrack.album.images?.[0];
+
+    const [sound, setSound] = useState<Sound>();
+    const [isPlaying, setIsPlaying] = useState(false);
+ 
+    useEffect(() => {
+        playTrack();
+
+    }, [currentTrack]);
+
+	const playTrack = async () => {
+    if (sound) {
+      await sound.unloadAsync();
+    }
+
+    if (!currentTrack?.preview_url) {
+      return;
+    }
+
+    const { sound: newSound } = await Audio.Sound.createAsync({
+      uri: currentTrack.preview_url,
+    });
+    setSound(newSound);
+    newSound.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate   )
+    await newSound.playAsync();
+  };
+
+  const onPlayBackStatusUpdate =(status: AVPlaybackStatus)=>{
+    // this function is useful to interuct with the song being play, including allowing us to get the 'durationMillis' for the song progress bar
+    console.log('status: ', status)
+    if(!status.isLoaded){
+        return
+    }
+    
+    setIsPlaying(status.isPlaying);
+  }
+  const onPause =async () => {
+    if(!sound){
+        return
+    }
+
+    if(isPlaying){
+        sound.pauseAsync();
+    }else{
+        sound.playAsync()
+    }
+    setIsPlaying(!isPlaying);
+
+  }
+  
 
   return (
     <View style={styles.container}>
@@ -20,6 +71,7 @@ const Player = () => {
         <View style={{ flex: 1 }}>
           <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{currentTrack.name}</Text>
           <Text style={styles.subtitle} numberOfLines={1} ellipsizeMode="tail">{currentTrack.artists[0]?.name}</Text>
+          <View style={styles.progressBar}/>
         </View>
 
         <Ionicons
@@ -29,8 +81,9 @@ const Player = () => {
           style={{ marginHorizontal: 10 }}
         />
         <Ionicons
+          onPress={onPause}
           disabled={!currentTrack?.preview_url}
-          name={'play'}
+          name={isPlaying ? 'pause' : 'play'}
           size={22}
           color={currentTrack?.preview_url ? 'white' : 'gray'}
         />
@@ -69,6 +122,10 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 5,
   },
+  progressBar: {
+    backgroundColor: 'white',
+    height: 2,
+  }
 });
 
 export default Player;

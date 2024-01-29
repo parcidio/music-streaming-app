@@ -1,10 +1,7 @@
 
 import { Text, View, StyleSheet,  Pressable, Image } from 'react-native';
-import { Track } from '@/assets/types';
+import { Track, TrackListItemProps } from '@/assets/types';
 import {usePlayerContext} from '../providers/PlayerProvider'
-type TrackListItemProps = {
-    track: Track
-}
 
 export default function TrackListItem ({track} : TrackListItemProps){
     const image = track.album?.images?.[0];
@@ -36,7 +33,7 @@ const styles = StyleSheet.create({
     containerActive: {
       width: '100%',
       padding: 10,
-      backgroundColor: 'lightgray',
+      backgroundColor: 'lightwhite',
       gap: 5,
       flexDirection: 'row',
       alignItems: 'center',

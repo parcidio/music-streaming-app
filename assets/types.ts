@@ -26,3 +26,7 @@ export type PlayerContextType={
   currentTrack?: Track;
   setCurrentTrack: (currentTrack:Track)=> void;
 }
+
+export type TrackListItemProps = {
+  track: Track
+}
