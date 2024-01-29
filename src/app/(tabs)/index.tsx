@@ -17,11 +17,13 @@ import RecentlyPlayedCard from "../../components/AlbumCard";
 import { useNavigation } from "@react-navigation/native";
 import { TrackListItemProps } from "@/assets/types";
 import { tracks } from '@/assets/data/tracks';
+import { bannerData } from '@/assets/data/banner';
 import TrackListItem from "@/src/components/TrackListItem";
 import GenreCard from "@/src/components/Genre";
 import { Link } from "expo-router";
 import Colors from "@/src/constants/Colors";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { HomeBanner } from "@/src/components/banner";
 
 
 const HomeScreen = () => {
@@ -66,6 +68,7 @@ const HomeScreen = () => {
 
       </View>
       <ScrollView>
+        <HomeBanner items={bannerData} pagination={true} autoPlay={false} />
         <Text
           style={styles.heading}
         >
@@ -80,7 +83,7 @@ const HomeScreen = () => {
         <Text
           style={styles.heading}
         >
-          Your Top Artists
+          Os Top Artistas
         </Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {tracks.map((item, index) => (
@@ -91,7 +94,7 @@ const HomeScreen = () => {
         <Text
           style={styles.heading}
         >
-          Recently Played
+          Albums populares
         </Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {tracks.map((item, index) => (
