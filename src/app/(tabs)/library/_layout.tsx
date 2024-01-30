@@ -48,9 +48,13 @@ import {
   Dimensions,
   Animated,
 } from 'react-native';
-import { tracks as data } from '../../../assets/data/tracks';
+import { tracks as data } from '../../../../assets/data/tracks';
 import { TrackListItemProps } from '@/assets/types';
 import { HomeBanner } from '@/src/components/banner';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import LibraryTracksScreen from './tracks';
+import LibraryAlbumsScreen from './albums';
+import LibraryArtistsScreen from './artists';
 
 const { width, height } = Dimensions.get('window');
 const LOGO_WIDTH = 220;
@@ -58,46 +62,38 @@ const LOGO_HEIGHT = 40;
 const DOT_SIZE = 40;
 const TICKER_HEIGHT = 40;
 const CIRCLE_SIZE = width * 0.6;
-
+const Tab = createMaterialTopTabNavigator();
 
 export default function LibraryScreen() {
 
-
-  const bannerData = [
-    {
-      image: "https://portalrapmais.com/wp-content/uploads/2022/11/Future-2.jpg",
-      type: "Album",
-      ksId: "jlkljn2323",
-      title: "Title 1",
-      subtitle: "Subtitle 1",
-    },
-    {
-      image: "https://portalrapmais.com/wp-content/uploads/2022/11/Future-2.jpg",
-      type: "Artist",
-      ksId: "jlkljn23000",
-      title: "Title 2",
-      subtitle: "Subtitle 2",
-    },
-    {
-      image: "https://portalrapmais.com/wp-content/uploads/2022/11/Future-2.jpg",
-      type: "Playlist",
-      ksId: "2342deds",
-      title: "Title 3",
-      subtitle: "Subtitle 3",
-    },
-    {
-      image: "https://portalrapmais.com/wp-content/uploads/2022/11/Future-2.jpg",
-      type: "Album",
-      ksId: "k5304kf",
-      title: "Title 4",
-      subtitle: "Subtitle 4",
-    },
-  ]
-
   return (
-    <View style={styles.container}>
-      <HomeBanner items={bannerData} pagination={true} autoPlay={false} />
-    </View>
+    // <View style={styles.container}>
+    <Tab.Navigator
+      initialRouteName="tracks"
+      screenOptions={{
+        tabBarActiveTintColor: 'black',
+        tabBarLabelStyle: { fontSize: 12 },
+        tabBarStyle: { backgroundColor: 'transparent', elevation: 0, },
+      }}
+
+    >
+      <Tab.Screen
+        name="tracks"
+        component={LibraryTracksScreen}
+        options={{ tabBarLabel: 'Tracks' }}
+      />
+      <Tab.Screen
+        name="albums"
+        component={LibraryAlbumsScreen}
+        options={{ tabBarLabel: 'Albums' }}
+      />
+      <Tab.Screen
+        name="artists"
+        component={LibraryArtistsScreen}
+        options={{ tabBarLabel: 'Artistas' }}
+      />
+    </Tab.Navigator>
+    // {/* </View> */}
   );
 }
 
