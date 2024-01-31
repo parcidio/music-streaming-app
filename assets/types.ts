@@ -34,3 +34,8 @@ export type TrackListItemProps = {
 export type Genre = {
   title: String
 }
+
+export type Menu = {
+  text: String
+  color: string
+}

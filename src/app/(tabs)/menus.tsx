@@ -4,35 +4,21 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import TrackListItem from '@/src/components/TrackListItem';
 import { tracks } from '@/assets/data/tracks';
+import MenuItem from '@/src/components/menuItem';
+import { menus } from '@/assets/data/menus';
 
 export default function MenusScreen() {
     const [search, setSearch] = useState('');
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <FontAwesome name="search" size={16} color="gray" />
-                <TextInput
-                    value={search}
-                    placeholder="What do you want to listen to?"
-                    placeholderTextColor="gray"
-                    onChangeText={setSearch}
-                    style={styles.input}
-                />
-                {search.length > 0 && (
-                    <Text onPress={() => setSearch('')} style={styles.cancelText}>
-                        Cancel
-                    </Text>
-                )}
-            </View>
+
 
             <ScrollView>
-                <View style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
 
-                    {tracks.map((item, index) => (
-                        <ArtistCard track={item} key={index} />
-                    ))}
-                </View>
+                {menus.map((item, index) => (
+                    <MenuItem text={item.text} color={item.color} key={index} />
+                ))}
             </ScrollView>
         </SafeAreaView>
     );
