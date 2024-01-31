@@ -101,7 +101,11 @@ const HomeScreen = () => {
             <RecentlyPlayedCard track={item} key={index} />
           ))}
         </ScrollView>
-
+        <Text
+          style={styles.heading}
+        >
+          Novos lançamentos
+        </Text>
         <FlatList
           data={tracks}
           renderItem={({ item }) => <TrackListItem track={item} />}

@@ -1,20 +1,23 @@
-import { FlatList, ScrollView, StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../../../components/EditScreenInfo';
+import { ScrollView, StyleSheet } from 'react-native';
 import { Text, View } from '../../../components/Themed';
 import React from 'react';
-import GenreCard from '@/src/components/Genre';
 import AlbumCard from '@/src/components/AlbumCard';
 import { tracks } from '@/assets/data/tracks';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 export default function LibraryTracksScreen() {
+    const Tab = createMaterialTopTabNavigator();
+
     return (
         <View style={styles.container}>
+
+
             <Text
                 style={styles.heading}
             >
                 Favoritos
             </Text>
+
             <ScrollView>
                 <View style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
 
@@ -42,6 +45,7 @@ const styles = StyleSheet.create({
         height: 1,
         width: '80%',
     },
+
     heading: {
         display: "flex",
         color: "black",

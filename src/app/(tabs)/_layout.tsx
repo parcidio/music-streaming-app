@@ -46,6 +46,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="menus"
+
+        options={{
+          title: 'As mas quentes',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="fire" color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="downloads"
         options={{
           title: 'Downloads',
