@@ -67,33 +67,33 @@ const Tab = createMaterialTopTabNavigator();
 export default function LibraryScreen() {
 
   return (
-    // <View style={styles.container}>
-    <Tab.Navigator
-      initialRouteName="tracks"
-      screenOptions={{
-        tabBarActiveTintColor: 'black',
-        tabBarLabelStyle: { fontSize: 12 },
-        tabBarStyle: { backgroundColor: 'transparent', elevation: 0, },
-      }}
+    <View style={styles.container}>
+      <Tab.Navigator
+        initialRouteName="tracks"
+        screenOptions={{
+          tabBarActiveTintColor: 'black',
+          tabBarLabelStyle: { fontSize: 12 },
+          tabBarStyle: { backgroundColor: 'white', elevation: 0, },
+        }}
 
-    >
-      <Tab.Screen
-        name="tracks"
-        component={LibraryTracksScreen}
-        options={{ tabBarLabel: 'Tracks' }}
-      />
-      <Tab.Screen
-        name="albums"
-        component={LibraryAlbumsScreen}
-        options={{ tabBarLabel: 'Albums' }}
-      />
-      <Tab.Screen
-        name="artists"
-        component={LibraryArtistsScreen}
-        options={{ tabBarLabel: 'Artistas' }}
-      />
-    </Tab.Navigator>
-    // {/* </View> */}
+      >
+        <Tab.Screen
+          name="tracks"
+          component={LibraryTracksScreen}
+          options={{ tabBarLabel: 'Tracks' }}
+        />
+        <Tab.Screen
+          name="albums"
+          component={LibraryAlbumsScreen}
+          options={{ tabBarLabel: 'Albums' }}
+        />
+        <Tab.Screen
+          name="artists"
+          component={LibraryArtistsScreen}
+          options={{ tabBarLabel: 'Artistas' }}
+        />
+      </Tab.Navigator>
+    </View>
   );
 }
 

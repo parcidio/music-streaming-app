@@ -3,8 +3,8 @@ import React from "react";
 import { TrackListItemProps } from "@/assets/types";
 
 
-const ArtistCard = ({track} : TrackListItemProps) => {
-    const image = track.album?.images?.[0];
+const AlbumCard = ({ track }: TrackListItemProps) => {
+  const image = track.album?.images?.[0];
 
   return (
     <View style={{ margin: 10 }}>
@@ -15,9 +15,9 @@ const ArtistCard = ({track} : TrackListItemProps) => {
       />
       <Text
         style={styles.title}
-        
+
         numberOfLines={1} ellipsizeMode="tail"
-        
+
       >
         {track?.name}
       </Text>
@@ -25,16 +25,16 @@ const ArtistCard = ({track} : TrackListItemProps) => {
   );
 };
 
-export default ArtistCard;
+export default AlbumCard;
 
 const styles = StyleSheet.create({
-  card:{ width: 130, height: 130, borderRadius: 10 },
-    title:{
-        fontSize: 13,
-        fontWeight: "500",
-        color: "black",
-        marginTop: 10,
-        width: 100, // Set the desired width
-        flexWrap: 'wrap',
-      }
+  card: { width: 130, height: 130, borderRadius: 10 },
+  title: {
+    fontSize: 13,
+    fontWeight: "500",
+    color: "black",
+    marginTop: 10,
+    width: 100, // Set the desired width
+    flexWrap: 'wrap',
+  }
 });
