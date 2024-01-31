@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     input: {
-        flex: 1,
+        // flex: 1,
         marginHorizontal: 10,
         fontSize: 16,
         paddingVertical: 8,

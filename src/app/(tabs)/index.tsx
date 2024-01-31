@@ -24,6 +24,7 @@ import { Link } from "expo-router";
 import Colors from "@/src/constants/Colors";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { HomeBanner } from "@/src/components/banner";
+import { SearchBox } from "@/src/components/searchBox";
 
 
 const HomeScreen = () => {
@@ -40,16 +41,8 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={styles.searchBar}>
-          <FontAwesome name="search" size={16} color="gray" />
-          <TextInput
-            value={search}
-            placeholder="What do you want to listen to?"
-            placeholderTextColor="gray"
-            onChangeText={setSearch}
-            style={styles.input}
-          />
-        </View>
+        <SearchBox search setSearch />
+
         <Link href="/profile" asChild>
           <Pressable>
             {({ pressed }) => (
@@ -59,6 +52,7 @@ const HomeScreen = () => {
                   height: 40,
                   borderRadius: 20,
                   resizeMode: "cover",
+
                 }}
                 source={{ uri: tracks[0].album?.images?.[0].url }}
               />
@@ -124,7 +118,8 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+
 
   },
   searchBar: {
