@@ -52,7 +52,11 @@ function RootLayoutNav() {
       <PlayerProvider>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="profile" options={{ presentation: 'modal' }} />
+          <Stack.Screen name="profile" options={{ presentation: 'modal', headerShown: false }} />
+          <Stack.Screen name="hits" options={{ presentation: 'modal', headerShown: false }} />
+          <Stack.Screen name="newArtists" options={{ presentation: 'modal', headerShown: false }} />
+          <Stack.Screen name="surpriseMe" options={{ presentation: 'modal', headerShown: false }} />
+          <Stack.Screen name="newReleases" options={{ presentation: 'modal', headerShown: false }} />
         </Stack>
       </PlayerProvider>
     </ThemeProvider>

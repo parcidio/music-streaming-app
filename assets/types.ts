@@ -1,3 +1,5 @@
+import { LinkProps } from "expo-router";
+
 export type Track = {
   id: string;
   name: string;
@@ -35,7 +37,11 @@ export type Genre = {
   title: String
 }
 
+type HrefType = "/newReleases" | "/hits" | "/newArtists" | "/surpriseMe";
+
+
 export type Menu = {
+  link: HrefType 
   text: String
   color: string
 }

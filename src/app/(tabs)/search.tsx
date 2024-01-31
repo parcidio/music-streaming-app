@@ -4,28 +4,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import TrackListItem from '@/src/components/TrackListItem';
 import { tracks } from '@/assets/data/tracks';
-
+import { SearchBox } from '@/src/components/searchBox';
 export default function SearchScreen() {
   const [search, setSearch] = useState('');
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <FontAwesome name="search" size={16} color="gray" />
-        <TextInput
-          value={search}
-          placeholder="What do you want to listen to?"
-          placeholderTextColor="gray"
-          onChangeText={setSearch}
-          style={styles.input}
-        />
-        {search.length > 0 && (
-          <Text onPress={() => setSearch('')} style={styles.cancelText}>
-            Cancel
-          </Text>
-        )}
-      </View>
-
+      <SearchBox search setSearch />
       <FlatList
         data={tracks}
         renderItem={({ item }) => <TrackListItem track={item} />}

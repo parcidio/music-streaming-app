@@ -1,22 +1,21 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import React from "react";
 import { Menu } from "@/assets/types";
+import { Link } from "expo-router";
 
-
-
-const MenuItem = ({ text, color }: Menu) => {
-
-
+const MenuItem = ({ link, text, color }: Menu) => {
     return (
-        <View style={{ ...styles.container, backgroundColor: color }}>
-
-            <Text
-                style={styles.title}
-            >
-                {text.toUpperCase()}
-            </Text>
-        </View>
-
+        <Link href={link} asChild>
+            <Pressable>
+                <View style={{ ...styles.container, backgroundColor: color }}>
+                    <Text
+                        style={styles.title}
+                    >
+                        {text.toUpperCase()}
+                    </Text>
+                </View>
+            </Pressable>
+        </Link>
     );
 };
 
@@ -25,9 +24,11 @@ export default MenuItem;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center', // Center content vertically (if needed)
+        justifyContent: 'center',
         alignItems: 'center',
-        marginHorizontal: 20,    // Center content horizontally (if needed)
+        borderRadius: 10,
+        margin: 10,
+        elevation: 2,
     },
 
     title: {
@@ -37,8 +38,7 @@ const styles = StyleSheet.create({
         fontSize: 13,
         fontWeight: "900",
         color: "white",
-        padding: 20,
-        width: 100,
+        margin: 40,
         flexWrap: 'wrap',
     }
 });

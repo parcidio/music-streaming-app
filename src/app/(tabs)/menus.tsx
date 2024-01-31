@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
-import { FlatList, StyleSheet, TextInput, Text, View, ScrollView } from 'react-native';
+import { FlatList, StyleSheet, TextInput, Text, View, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import TrackListItem from '@/src/components/TrackListItem';
 import { tracks } from '@/assets/data/tracks';
 import MenuItem from '@/src/components/menuItem';
 import { menus } from '@/assets/data/menus';
+import { Link } from 'expo-router';
 
 export default function MenusScreen() {
-    const [search, setSearch] = useState('');
-
     return (
         <SafeAreaView style={styles.container}>
-
-
             <ScrollView>
-
                 {menus.map((item, index) => (
-                    <MenuItem text={item.text} color={item.color} key={index} />
+                    <MenuItem link={item.link} text={item.text} color={item.color} key={index} />
                 ))}
             </ScrollView>
         </SafeAreaView>
