@@ -7,7 +7,6 @@ import {
     TextInput,
 } from "react-native";
 import React, { useState } from "react";
-import { FontAwesome } from "@expo/vector-icons";
 import { tracks } from '@/assets/data/tracks';
 import { Link } from "expo-router";
 import { Icon } from "./Icon";
@@ -19,16 +18,18 @@ export function SearchBox({ search, setSearch, showProfile = false, showSearchBo
     return (
         <View style={styles.headerContainer}>
             {showBackButton && (<Pressable onPress={() => navigation.goBack()}>
-                <Icon name="arrow-back" color="black" />
+                <Icon name="arrow-back-sharp" color="black" />
             </Pressable>)}
             <View style={styles.header}>
                 {showSearchBox && (
-                    <><FontAwesome name="search" size={16} color="gray" /><TextInput
-                        value={search}
-                        placeholder="What do you want to listen to?"
-                        placeholderTextColor="gray"
-                        onChangeText={setSearch}
-                        style={styles.input} /></>
+                    <>
+                        <Icon name="search" color="gray" /><TextInput
+                            value={search}
+                            placeholder="What do you want to listen to?"
+                            placeholderTextColor="gray"
+                            onChangeText={setSearch}
+                            style={styles.input} />
+                    </>
                 )}
 
                 {search.length > 0 && (
@@ -62,10 +63,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-
     headerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginHorizontal: 14,
     },
     header: {
         flex: 1,

@@ -2,18 +2,25 @@ import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import React from "react";
 import { Menu } from "@/assets/types";
 import { Link } from "expo-router";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const MenuItem = ({ link, text, color }: Menu) => {
     return (
+
         <Link href={link} asChild>
             <Pressable>
-                <View style={{ ...styles.container, backgroundColor: color }}>
+                <LinearGradient
+                    colors={['#4c669f', '#3b5998', color]}
+                    style={{ ...styles.container, backgroundColor: color }}
+                    start={{ x: 0, y: 4 }}
+                    end={{ x: 1, y: 0 }}
+                >
                     <Text
                         style={styles.title}
                     >
                         {text.toUpperCase()}
                     </Text>
-                </View>
+                </LinearGradient>
             </Pressable>
         </Link>
     );
