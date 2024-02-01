@@ -14,22 +14,23 @@ import { Icon } from "./Icon";
 import { useNavigation } from "@react-navigation/native";
 
 
-export function SearchBox({ search, setSearch, showProfile = false, showBackButton = false }: any) {
+export function SearchBox({ search, setSearch, showProfile = false, showSearchBox = true, showBackButton = false }: any) {
     const navigation = useNavigation();
     return (
         <View style={styles.headerContainer}>
             {showBackButton && (<Pressable onPress={() => navigation.goBack()}>
-                <Icon name="arrow-left" color="black" />
+                <Icon name="arrow-back" color="black" />
             </Pressable>)}
             <View style={styles.header}>
-                <FontAwesome name="search" size={16} color="gray" />
-                <TextInput
-                    value={search}
-                    placeholder="What do you want to listen to?"
-                    placeholderTextColor="gray"
-                    onChangeText={setSearch}
-                    style={styles.input}
-                />
+                {showSearchBox && (
+                    <><FontAwesome name="search" size={16} color="gray" /><TextInput
+                        value={search}
+                        placeholder="What do you want to listen to?"
+                        placeholderTextColor="gray"
+                        onChangeText={setSearch}
+                        style={styles.input} /></>
+                )}
+
                 {search.length > 0 && (
                     <Text onPress={() => setSearch('')} style={styles.cancelText}>
                         Cancel

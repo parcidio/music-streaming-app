@@ -1,5 +1,6 @@
 import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Ionicons } from "@expo/vector-icons/";
+
 import { Link, Tabs } from 'expo-router';
 import { Pressable, View } from 'react-native';
 
@@ -10,11 +11,11 @@ import { BottomTabBar } from '@react-navigation/bottom-tabs'
 import Player from '@/src/components/Player';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+export function TabBarIcon(props: {
+  name: React.ComponentProps<typeof Ionicons>['name'];
   color: string;
 }) {
-  return <FontAwesome size={21} style={{ marginBottom: -3 }} {...props} />;
+  return <Ionicons size={21} style={{ marginBottom: -3 }} {...props} />;
 }
 
 export default function TabLayout() {

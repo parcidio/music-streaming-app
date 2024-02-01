@@ -1,8 +1,8 @@
-import { FontAwesome } from "@expo/vector-icons/";
+import { Ionicons } from "@expo/vector-icons/";
 
 export function Icon(props: {
-    name: React.ComponentProps<typeof FontAwesome>['name'];
+    name: React.ComponentProps<typeof Ionicons>['name'];
     color: string;
 }) {
-    return <FontAwesome size={21} style={{ marginBottom: -3 }} {...props} />;
+    return <Ionicons size={21} style={{ marginBottom: -3 }} {...props} />;
 }
