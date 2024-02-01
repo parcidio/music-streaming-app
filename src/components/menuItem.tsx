@@ -1,13 +1,13 @@
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable, Platform } from "react-native";
 import React from "react";
 import { Menu } from "@/assets/types";
 import { Link } from "expo-router";
 import { LinearGradient } from 'expo-linear-gradient';
-
+import Animated from "react-native-reanimated"
 const MenuItem = ({ link, text, color }: Menu) => {
     return (
 
-        <Link href={link} asChild>
+        <Animated.View><Link href={link} asChild>
             <Pressable>
                 <LinearGradient
                     colors={['#4c669f', '#3b5998', color]}
@@ -23,6 +23,7 @@ const MenuItem = ({ link, text, color }: Menu) => {
                 </LinearGradient>
             </Pressable>
         </Link>
+        </Animated.View>
     );
 };
 

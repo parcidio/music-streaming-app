@@ -1,17 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { FlatList, Platform, ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
+
+import { Text, View } from '../components/Themed';
+import { SearchBox } from '../components/searchBox';
+import { useState } from 'react';
+import { tracks } from '@/assets/data/tracks';
+import ArtistCard from '../components/ArtistCard';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
-import TrackListItem from '../components/TrackListItem';
-import { SearchBox } from '../components/searchBox';
-import search from './(tabs)/search';
-import { useState } from 'react';
-import AlbumCard from '../components/AlbumCard';
-import { tracks } from '@/assets/data/tracks';
-
-export default function HitsScreen() {
+export default function djScreen() {
     const [search, setSearch] = useState('');
 
     return (
@@ -21,14 +17,14 @@ export default function HitsScreen() {
                 <Text
                     style={styles.heading}
                 >
-                    Os melhores hits
+                    Os melhores Mixes
                 </Text>
 
                 <ScrollView>
                     <View style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
 
                         {tracks.map((item, index) => (
-                            <AlbumCard track={item} key={index} />
+                            <ArtistCard track={item} key={index} />
                         ))}
                     </View>
                 </ScrollView>

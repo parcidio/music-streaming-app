@@ -37,7 +37,7 @@ export type Genre = {
   title: String
 }
 
-type HrefType = "/newReleases" | "/hits" | "/newArtists" | "/surpriseMe";
+type HrefType = "/newReleases" | "/hits" | "/newArtists" | "/surpriseMe"| "/dj";
 
 
 export type Menu = {

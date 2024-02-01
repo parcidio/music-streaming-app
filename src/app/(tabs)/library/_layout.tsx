@@ -38,19 +38,12 @@ GitHub: http://github.com/catalinmiron
 Video Tutorial: https://youtu.be/cGTD4yYgEHc
 */
 
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  Image,
   Dimensions,
-  Animated,
 } from 'react-native';
-import { tracks as data } from '../../../../assets/data/tracks';
-import { TrackListItemProps } from '@/assets/types';
-import { HomeBanner } from '@/src/components/banner';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import LibraryTracksScreen from './tracks';
 import LibraryAlbumsScreen from './albums';

@@ -18,7 +18,7 @@ const SECTIONS = [
   {
     header: 'Definições',
     items: [
-      { label: 'Lingua', value: 'English', type: 'input' },
+      { label: 'Lingua', value: 'Português', type: 'input' },
       { label: 'Local', value: 'Angola', type: 'input' },
       { label: 'Tema Escuro', value: false, type: 'boolean' },
       { label: 'Use Wi-Fi', value: true, type: 'boolean' },

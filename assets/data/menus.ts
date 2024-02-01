@@ -9,7 +9,7 @@ export const menus: Menu[] = [
     {
         link: "/newReleases",
         text: "Novos lançamentos",
-        color: "blue",
+        color: "purple",
     },
     {
         link: "/newArtists",
@@ -21,4 +21,10 @@ export const menus: Menu[] = [
         text: "Surpreenda-me",
         color: "green",
     },
+    {
+        text: "Dj Sessions",
+        link: "/dj",
+        color: "#128d72",
+    },
+
 ]

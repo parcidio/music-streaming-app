@@ -7,16 +7,21 @@ import { tracks } from '@/assets/data/tracks';
 import MenuItem from '@/src/components/menuItem';
 import { menus } from '@/assets/data/menus';
 import { Link } from 'expo-router';
+import Animated from "react-native-reanimated"
 
 export default function MenusScreen() {
+
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView>
-                {menus.map((item, index) => (
-                    <MenuItem link={item.link} text={item.text} color={item.color} key={index} />
-                ))}
-            </ScrollView>
-        </SafeAreaView>
+
+        <Animated.ScrollView
+            scrollEventThrottle={16}
+            showsVerticalScrollIndicator={false}
+            style={{ backgroundColor: "transparent" }}>
+            {menus.map((item, index) => (
+                <MenuItem link={item.link} text={item.text} color={item.color} key={index} />
+            ))}
+        </Animated.ScrollView>
+
     );
 }
 

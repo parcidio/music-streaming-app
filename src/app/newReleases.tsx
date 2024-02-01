@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { FlatList, StyleSheet, TextInput, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import TrackListItem from '@/src/components/TrackListItem';
+import { ScrollView, StyleSheet } from 'react-native';
+
+import { Text, View } from '../components/Themed';
+import { SearchBox } from '../components/searchBox';
+import { useState } from 'react';
 import { tracks } from '@/assets/data/tracks';
-import { SearchBox } from '@/src/components/searchBox';
+import ArtistCard from '../components/ArtistCard';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import AlbumCard from '../components/AlbumCard';
 
 export default function NewReleasesScreen() {
   const [search, setSearch] = useState('');
@@ -12,11 +14,22 @@ export default function NewReleasesScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <SearchBox search={search} setSearch={setSearch} showProfile={true} showBackButton={true} />
+      <View style={styles.container}>
+        <Text
+          style={styles.heading}
+        >
+          Novos lançamentos
+        </Text>
 
-      <FlatList
-        data={tracks}
-        renderItem={({ item }) => <TrackListItem track={item} />}
-      />
+        <ScrollView>
+          <View style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
+
+            {tracks.map((item, index) => (
+              <AlbumCard track={item} key={index} />
+            ))}
+          </View>
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
@@ -35,5 +48,15 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: '80%',
+  },
+  heading: {
+    display: "flex",
+    color: "black",
+    fontSize: 19,
+    fontWeight: "bold",
+    marginHorizontal: 10,
+    marginTop: 10,
+    textAlign: "left",
+    justifyContent: "flex-start",
   },
 });
