@@ -11,7 +11,7 @@ export default function DownloadsScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <SearchBox search setSearch />
+      <SearchBox search={search} setSearch={setSearch} />
       <FlatList
         data={tracks}
         renderItem={({ item }) => <TrackListItem track={item} />}

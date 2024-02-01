@@ -40,27 +40,9 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <SearchBox search setSearch />
-
-        <Link href="/profile" asChild>
-          <Pressable>
-            {({ pressed }) => (
-              <Image
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 20,
-                  resizeMode: "cover",
-
-                }}
-                source={{ uri: tracks[0].album?.images?.[0].url }}
-              />
-            )}
-          </Pressable>
-        </Link>
-
-      </View>
+      {/* <View style={styles.header}> */}
+      <SearchBox search={search} setSearch={setSearch} showProfile={true} />
+      {/* </View> */}
       <ScrollView>
         <HomeBanner items={bannerData} pagination={true} autoPlay={false} />
         <Text

@@ -1,19 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
+import { FlatList, Platform, SafeAreaView, StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import TrackListItem from '../components/TrackListItem';
+import { SearchBox } from '../components/searchBox';
+import tracks from './(tabs)/library/tracks';
+import search from './(tabs)/search';
+import { useState } from 'react';
 
 export default function HitsScreen() {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Modal</Text>
-            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-            <EditScreenInfo path="app/modal.tsx" />
+    const [search, setSearch] = useState('');
 
-            {/* Use a light status bar on iOS to account for the black space above the modal */}
-            <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
-        </View>
+    return (
+        <SafeAreaView style={styles.container}>
+            <SearchBox search={search} setSearch={setSearch} showProfile={true} showBackButton={true} />
+
+        </SafeAreaView>
     );
 }
 
