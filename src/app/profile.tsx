@@ -28,7 +28,7 @@ const SECTIONS = [
     header: 'Suporte',
     items: [
       { label: 'Envie um email', type: 'link' },
-
+      { label: 'Mensagens', type: 'link' },
     ],
   },
 

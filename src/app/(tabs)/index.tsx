@@ -56,11 +56,19 @@ const HomeScreen = () => {
           ))}
         </ScrollView>
 
-        <Text
-          style={styles.heading}
-        >
-          Os Top Artistas
-        </Text>
+        <View style={styles.head}>
+          <Text
+            style={styles.heading}
+          >
+            Os Top Artistas
+          </Text>
+          <Text
+            onPress={() => { }}
+            style={styles.link}
+          >
+            Todos
+          </Text>
+        </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {tracks.map((item, index) => (
             <ArtistCard track={item} key={index} />
@@ -131,5 +139,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginHorizontal: 10,
     marginTop: 10,
+  },
+  link: {
+    color: "red",
+    fontSize: 14,
+    fontWeight: "normal",
+    marginHorizontal: 10,
+    marginTop: 10,
+  },
+  head: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
