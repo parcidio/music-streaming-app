@@ -5,16 +5,18 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import TrackListItem from '@/src/components/TrackListItem';
 import { tracks } from '@/assets/data/tracks';
 import { SearchBox } from '@/src/components/searchBox';
+import DownloadTrackItem from '@/src/components/DownloadTrackListItem';
 
 export default function DownloadsScreen() {
   const [search, setSearch] = useState('');
+  const [currentTrack, setCurrentTrack] = useState();
 
   return (
     <SafeAreaView style={styles.container}>
       <SearchBox search={search} setSearch={setSearch} />
       <FlatList
         data={tracks}
-        renderItem={({ item }) => <TrackListItem track={item} />}
+        renderItem={({ item }) => <DownloadTrackItem track={item} />}
       />
     </SafeAreaView>
   );
