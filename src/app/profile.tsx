@@ -31,7 +31,6 @@ const SECTIONS = [
       { label: 'Mensagens', type: 'link' },
     ],
   },
-
 ];
 
 export default function ProfileScreen() {
