@@ -55,6 +55,8 @@ function RootLayoutNav() {
           <Stack.Screen name="profile" options={{ presentation: 'modal', headerShadowVisible: false }} />
           <Stack.Screen name="hits" options={{ presentation: 'modal', headerShown: false }} />
           <Stack.Screen name="newArtists" options={{ presentation: 'modal', headerShown: false }} />
+          <Stack.Screen name="artists" options={{ presentation: 'modal', headerShown: false }} />
+          <Stack.Screen name="albums" options={{ presentation: 'modal', headerShown: false }} />
           <Stack.Screen name="surpriseMe" options={{ presentation: 'modal', headerShown: false }} />
           <Stack.Screen name="newReleases" options={{ presentation: 'modal', headerShown: false }} />
           <Stack.Screen name="dj" options={{ presentation: 'modal', headerShown: false }} />

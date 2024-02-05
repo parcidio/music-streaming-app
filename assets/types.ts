@@ -37,11 +37,17 @@ export type Genre = {
   title: String
 }
 
-type HrefType = "/newReleases" | "/hits" | "/newArtists" | "/surpriseMe"| "/dj";
+export type HrefType = "/newReleases"| "/menus" | "/albums" | "/artists" | "/hits" | "/newArtists" | "/surpriseMe"| "/dj";
 
 
 export type Menu = {
   link: HrefType 
   text: String
   color: string
+}
+
+export type HeaderProps = {
+  link: HrefType 
+  linkText: String
+  heading: string
 }
