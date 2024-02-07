@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { usePlayerContext } from '../providers/PlayerProvider';
 import { useEffect, useState } from 'react';
@@ -64,31 +64,35 @@ const Player = () => {
 
 
   return (
-    <View style={styles.container}>
-      <View style={styles.player}>
-        {image && <Image source={{ uri: image.url }} style={styles.image} />}
+    <Pressable
 
-        <View style={{ flex: 1 }}>
-          <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{currentTrack.name}</Text>
-          <Text style={styles.subtitle} numberOfLines={1} ellipsizeMode="tail">{currentTrack.artists[0]?.name}</Text>
-          <View style={styles.progressBar} />
+    >
+      <View style={styles.container}>
+        <View style={styles.player}>
+          {image && <Image source={{ uri: image.url }} style={styles.image} />}
+
+          <View style={{ flex: 1 }}>
+            <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{currentTrack.name}</Text>
+            <Text style={styles.subtitle} numberOfLines={1} ellipsizeMode="tail">{currentTrack.artists[0]?.name}</Text>
+            <View style={styles.progressBar} />
+          </View>
+
+          <Ionicons
+            name={'heart-outline'}
+            size={20}
+            color={'white'}
+            style={{ marginHorizontal: 10 }}
+          />
+          <Ionicons
+            onPress={onPause}
+            disabled={!currentTrack?.preview_url}
+            name={isPlaying ? 'pause' : 'play'}
+            size={22}
+            color={currentTrack?.preview_url ? 'white' : 'gray'}
+          />
         </View>
-
-        <Ionicons
-          name={'heart-outline'}
-          size={20}
-          color={'white'}
-          style={{ marginHorizontal: 10 }}
-        />
-        <Ionicons
-          onPress={onPause}
-          disabled={!currentTrack?.preview_url}
-          name={isPlaying ? 'pause' : 'play'}
-          size={22}
-          color={currentTrack?.preview_url ? 'white' : 'gray'}
-        />
       </View>
-    </View>
+    </Pressable>
   );
 };
 

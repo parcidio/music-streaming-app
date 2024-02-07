@@ -10,11 +10,16 @@ import React, { useState } from "react";
 import { tracks } from '@/assets/data/tracks';
 import { Link } from "expo-router";
 import { Icon } from "./Icon";
-import { useNavigation } from "@react-navigation/native";
+import { DarkTheme, DefaultTheme, useNavigation } from "@react-navigation/native";
+import { useColorScheme } from "./useColorScheme.web";
 
 
 export function SearchBox({ search, setSearch, showProfile = false, showSearchBox = true, showBackButton = false }: any) {
+    const colorScheme = useColorScheme();
+
     const navigation = useNavigation();
+
+    const theme = colorScheme === 'light' ? DarkTheme : DefaultTheme
     return (
         <View style={styles.headerContainer}>
             {showBackButton && (<Pressable onPress={() => navigation.goBack()}>
@@ -23,7 +28,7 @@ export function SearchBox({ search, setSearch, showProfile = false, showSearchBo
             <View style={styles.header}>
                 {showSearchBox && (
                     <>
-                        <Icon name="search" color="gray" /><TextInput
+                        <Icon name="search" color={theme} /><TextInput
                             value={search}
                             placeholder="What do you want to listen to?"
                             placeholderTextColor="gray"

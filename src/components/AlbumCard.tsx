@@ -7,7 +7,7 @@ const AlbumCard = ({ track }: TrackListItemProps) => {
   const image = track.album?.images?.[0];
 
   return (
-    <View style={{ margin: 10 }}>
+    <View style={{ margin: 10, maxWidth: "50%" }}>
       <Image
 
         style={styles.card}

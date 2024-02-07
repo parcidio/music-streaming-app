@@ -89,12 +89,12 @@ export default function ProfileScreen() {
                     onPress={() => {
                       setValue(index);
                     }}>
-                    <View style={styles.tab}>
+                    <View style={!isActive ? { ...styles.tab } : { ...styles.tab, backgroundColor: 'red' }}>
 
                       <Text
                         style={[
                           styles.tabText,
-                          isActive && { color: 'red' },
+                          isActive && { color: 'white' },
                         ]}>
                         {name}
                       </Text>
@@ -126,7 +126,7 @@ export default function ProfileScreen() {
                   )}
 
                   {type === 'boolean' && (
-                    <Switch trackColor={{ true: 'black' }} value={value} />
+                    <Switch trackColor={{ true: 'red', }} thumbColor="black" value={value} />
                   )}
 
                   {(type === 'input' || type === 'link') && (
@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
   tabs: {
     padding: 16,
     flexDirection: 'row',
+    gap: 10,
   },
   /** Profile */
   profile: {
@@ -228,17 +229,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 10,
-    paddingBottom: 10,
+    padding: 10,
     position: 'relative',
     overflow: 'hidden',
+    backgroundColor: 'white',
+    elevation: 1,
+    borderRadius: 5,
   },
   tabWrapper: {
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 0,
-    borderColor: '#e5e7eb',
-    borderBottomWidth: 2,
+    gap: 2,
+    // borderColor: '#e5e7eb',
+    // borderBottomWidth: 2,
   },
   tabText: {
     fontSize: 13,

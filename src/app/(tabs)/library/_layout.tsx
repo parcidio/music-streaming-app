@@ -62,13 +62,14 @@ export default function LibraryScreen() {
   return (
     <View style={styles.container}>
       <Tab.Navigator
+
         initialRouteName="tracks"
         screenOptions={{
           tabBarActiveTintColor: 'black',
           tabBarLabelStyle: { fontSize: 12 },
+          tabBarIndicatorStyle: { backgroundColor: 'red' },
           tabBarStyle: { backgroundColor: 'white', elevation: 0, },
         }}
-
       >
         <Tab.Screen
           name="tracks"
@@ -81,6 +82,7 @@ export default function LibraryScreen() {
           options={{ tabBarLabel: 'Albums' }}
         />
         <Tab.Screen
+
           name="artists"
           component={LibraryArtistsScreen}
           options={{ tabBarLabel: 'Artistas' }}

@@ -48,7 +48,9 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
+    // controls the theme
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      {/* controls the current song playing */}
       <PlayerProvider>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

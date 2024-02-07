@@ -1,5 +1,4 @@
 import { Pressable, ScrollView, StyleSheet } from 'react-native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Text, View } from '../../../components/Themed';
 import AlbumCard from '@/src/components/AlbumCard';
 import { tracks } from '@/assets/data/tracks';
@@ -9,25 +8,59 @@ const SECTIONS = [
     {
         header: 'Todos',
         items: [
-            { label: 'Lingua', value: 'Português', type: 'input' },
-            { label: 'Local', value: 'Angola', type: 'input' },
-            { label: 'Tema Escuro', value: false, type: 'boolean' },
-            { label: 'Use Wi-Fi', value: true, type: 'boolean' },
+            ...tracks
         ],
     },
     {
         header: 'Favourites',
         items: [
-            { label: 'Envie um email', type: 'link' },
-            { label: 'Mensagens', type: 'link' },
+            {
+                id: '6eT7xZZlB2mwyzJ2sUKG6w',
+                name: 'White Iverson',
+                preview_url: 'https://www.kozco.com/tech/piano2.wav',
+                artists: [
+                    {
+                        id: '246dkjvS1zLTtiykXe5h60',
+                        name: 'Post Malone',
+                    },
+                ],
+                album: {
+                    id: '5s0rmjP8XOPhP6HhqOhuyC',
+                    name: 'Stoney (Deluxe)',
+                    images: [
+                        {
+                            url: 'https://i.scdn.co/image/ab67616d0000b27355404f712deb84d0650a4b41',
+                            height: 640,
+                            width: 640,
+                        },
+                        {
+                            url: 'https://i.scdn.co/image/ab67616d00001e0255404f712deb84d0650a4b41',
+                            height: 300,
+                            width: 300,
+                        },
+                        {
+                            url: 'https://i.scdn.co/image/ab67616d0000485155404f712deb84d0650a4b41',
+                            height: 64,
+                            width: 64,
+                        },
+                    ],
+                },
+            },
+            ...tracks
         ],
+
     },
+
+
 ];
 
 export default function LibraryAlbumsScreen() {
     // const Tab = createMaterialTopTabNavigator();
     const [value, setValue] = useState(0);
+    const [currentTab, setCurrentTab] = useState("");
     const { tabs, items } = useMemo(() => {
+        setCurrentTab(SECTIONS[value].header)
+
         return {
             tabs: SECTIONS.map(({ header }) => ({
                 name: header,
@@ -73,14 +106,15 @@ export default function LibraryAlbumsScreen() {
                 <Text
                     style={styles.heading}
                 >
-                    Favoritos
+                    {currentTab}
+
                 </Text>
 
                 <ScrollView>
                     <View style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
-
-                        {tracks.map((item, index) => (
-                            <AlbumCard track={item} key={index} />
+                        {items.map((item, index) => (
+                            <AlbumCard
+                                track={item} key={index} />
                         ))}
                     </View>
                 </ScrollView>
