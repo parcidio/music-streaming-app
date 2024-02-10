@@ -1,9 +1,16 @@
-import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text, StyleSheet, Image, Pressable, ScrollView, FlatList } from 'react-native';
+import { AntDesign, Entypo, Feather, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { usePlayerContext } from '../providers/PlayerProvider';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AVPlaybackStatus, Audio } from 'expo-av'
 import { Sound } from 'expo-av/build/Audio';
+import { BottomModal, Modal, ModalButton, ModalContent, ModalFooter, SlideAnimation } from 'react-native-modals';
+import Header from './Header';
+import { tracks } from '@/assets/data/tracks';
+import RecentlyPlayedCard from "./AlbumCard";
+import TrackListItem from './TrackListItem';
+import ArtistCard from './ArtistCard';
+
 
 const Player = () => {
   const { currentTrack } = usePlayerContext();
@@ -62,10 +69,15 @@ const Player = () => {
 
   }
 
+  const [playerFullScreen, setPlayerFullScreen] = useState(true)
 
   return (
-    <Pressable
 
+    <Pressable
+      onPress={() => {
+        setPlayerFullScreen(true)
+        console.log("fullscreen")
+      }}
     >
       <View style={styles.container}>
         <View style={styles.player}>
@@ -92,7 +104,204 @@ const Player = () => {
           />
         </View>
       </View>
+      {/* <Modal
+        visible={playerFullScreen}
+        onTouchOutside={() => {
+          setPlayerFullScreen(false)
+        }}
+        modalAnimation={new SlideAnimation({
+          slideFrom: 'bottom',
+        })}
+        footer={
+          <ModalFooter>
+            <ModalButton
+              text="CANCEL"
+              onPress={() => { }}
+            />
+            <ModalButton
+              text="OK"
+              onPress={() => { }}
+            />
+          </ModalFooter>
+        }
+      >
+        <ModalContent>
+          {image && <Image source={{ uri: image.url }} style={styles.image} />}
+        </ModalContent>
+      </Modal> */}
+
+      <BottomModal
+        visible={playerFullScreen}
+        onDismiss={() => setPlayerFullScreen(false)}
+        swipeDirection={["up", "down"]}
+        swipeThreshold={200}
+      >
+        <ModalContent
+          style={{ height: "100%", width: "100%", backgroundColor: "black" }}
+        >
+          <ScrollView showsVerticalScrollIndicator={true}>
+
+            <View style={{ height: "100%", width: "100%", marginTop: 40 }}>
+              <Pressable
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <AntDesign
+                  onPress={() => setPlayerFullScreen(!playerFullScreen)}
+                  name="down"
+                  size={24}
+                  color="white"
+                />
+
+                {/* <Text
+                  style={{ fontSize: 14, fontWeight: "bold", color: "white" }}
+                >
+                  {currentTrack?.name}
+                </Text> */}
+
+                <Entypo name="dots-three-vertical" size={24} color="white" />
+              </Pressable>
+
+              <View style={{ height: 30 }} />
+
+              <View style={{ padding: 10 }}>
+                <Image
+                  style={{ width: "100%", height: 330, borderRadius: 10 }}
+                  source={{ uri: image.url }}
+                />
+                <View
+                  style={{
+                    marginTop: 10,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <View>
+                    <Text
+
+                      style={{
+                        color: "white", fontWeight: '500',
+
+                        fontSize: 16,
+                      }}
+                    >
+                      {currentTrack?.name}
+                    </Text>
+                    <Text style={{ color: "#D3D3D3", marginTop: 4 }}>
+                      {currentTrack?.artists[0].name}
+                    </Text>
+                  </View>
+
+                  <AntDesign name="heart" size={24} color="red" />
+                </View>
+
+                <View style={{ marginTop: 10 }}>
+                  <View
+                    style={{
+                      width: "100%",
+                      marginTop: 10,
+                      height: 3,
+                      backgroundColor: "gray",
+                      borderRadius: 5,
+                    }}
+                  >
+                    <View
+                      style={[
+                        // styles.progressbar,
+                        // { width: `${progress * 100}%` },
+                      ]}
+                    />
+                    <View
+                      style={[
+                        // {
+                        //   position: "absolute",
+                        //   top: -5,
+                        //   width: circleSize,
+                        //   height: circleSize,
+                        //   borderRadius: circleSize / 2,
+                        //   backgroundColor: "white",
+                        // },
+                        // {
+                        //   left: `${progress * 100}%`,
+                        //   marginLeft: -circleSize / 2,
+                        // },
+                      ]}
+                    />
+                  </View>
+                  <View
+                    style={{
+                      marginTop: 12,
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text
+                      style={{ color: "white", fontSize: 15 }}
+                    >
+                      {/* {formatTime(currentTime)} */}
+                    </Text>
+
+                    <Text
+                      style={{ color: "white", fontSize: 15 }}
+                    >
+                      {/* {formatTime(totalDuration)} */}
+                    </Text>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginTop: 17,
+                  }}
+                >
+
+                  <Pressable>
+                    <Ionicons name="play-skip-back" size={30} color="white" />
+                  </Pressable>
+                  <Pressable >
+                    {isPlaying ? (
+                      <AntDesign name="pausecircle" size={60} color="white" />
+                    ) : (
+                      <Pressable
+                        style={{
+                          width: 60,
+                          height: 60,
+                          borderRadius: 30,
+                          backgroundColor: "red",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Entypo name="controller-play" size={26} color="black" />
+                      </Pressable>
+                    )}
+                  </Pressable>
+                  <Pressable >
+                    <Ionicons name="play-skip-forward" size={30} color="white" />
+                  </Pressable>
+
+                </View>
+                <Header heading={"Albums populares"} link={"/albums"} linkText={"Mais"} />
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                  {tracks.map((item, index) => (
+                    <ArtistCard track={item} key={index} />
+                  ))}
+                </ScrollView>
+              </View>
+            </View>
+
+          </ScrollView>
+        </ModalContent>
+      </BottomModal>
     </Pressable>
+
+
   );
 };
 

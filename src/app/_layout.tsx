@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { ModalPortal } from 'react-native-modals';
 
 import { useColorScheme } from '../components/useColorScheme';
 import PlayerProvider from '../providers/PlayerProvider';
@@ -63,6 +64,8 @@ function RootLayoutNav() {
           <Stack.Screen name="newReleases" options={{ presentation: 'modal', headerShown: false }} />
           <Stack.Screen name="dj" options={{ presentation: 'modal', headerShown: false }} />
         </Stack>
+        <ModalPortal />
+
       </PlayerProvider>
     </ThemeProvider>
   );
