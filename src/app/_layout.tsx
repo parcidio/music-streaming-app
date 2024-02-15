@@ -8,6 +8,7 @@ import { ModalPortal } from 'react-native-modals';
 
 import { useColorScheme } from '../components/useColorScheme';
 import PlayerProvider from '../providers/PlayerProvider';
+import { CustomThemeProvider } from '../providers/CustomThemeContext';
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -50,23 +51,25 @@ function RootLayoutNav() {
 
   return (
     // controls the theme
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      {/* controls the current song playing */}
-      <PlayerProvider>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="profile" options={{ presentation: 'modal', headerShadowVisible: false }} />
-          <Stack.Screen name="hits" options={{ presentation: 'modal', headerShown: false }} />
-          <Stack.Screen name="newArtists" options={{ presentation: 'modal', headerShown: false }} />
-          <Stack.Screen name="artists" options={{ presentation: 'modal', headerShown: false }} />
-          <Stack.Screen name="albums" options={{ presentation: 'modal', headerShown: false }} />
-          <Stack.Screen name="surpriseMe" options={{ presentation: 'modal', headerShown: false }} />
-          <Stack.Screen name="newReleases" options={{ presentation: 'modal', headerShown: false }} />
-          <Stack.Screen name="dj" options={{ presentation: 'modal', headerShown: false }} />
-        </Stack>
-        <ModalPortal />
 
-      </PlayerProvider>
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <CustomThemeProvider>
+        {/* controls the current song playing */}
+        <PlayerProvider>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="profile" options={{ presentation: 'modal', headerShadowVisible: false }} />
+            <Stack.Screen name="hits" options={{ presentation: 'modal', headerShown: false }} />
+            <Stack.Screen name="newArtists" options={{ presentation: 'modal', headerShown: false }} />
+            <Stack.Screen name="artists" options={{ presentation: 'modal', headerShown: false }} />
+            <Stack.Screen name="albums" options={{ presentation: 'modal', headerShown: false }} />
+            <Stack.Screen name="surpriseMe" options={{ presentation: 'modal', headerShown: false }} />
+            <Stack.Screen name="newReleases" options={{ presentation: 'modal', headerShown: false }} />
+            <Stack.Screen name="dj" options={{ presentation: 'modal', headerShown: false }} />
+          </Stack>
+          <ModalPortal />
+        </PlayerProvider>
+      </CustomThemeProvider>
     </ThemeProvider>
   );
 }

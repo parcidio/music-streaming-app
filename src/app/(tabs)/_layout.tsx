@@ -36,6 +36,7 @@ export default function TabLayout() {
           title: 'Home',
           headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+
         }}
       />
       <Tabs.Screen

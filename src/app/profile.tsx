@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { Ionicons } from "@expo/vector-icons/";
 import { tracks } from '@/assets/data/tracks';
-
+import { useTheme } from '../providers/CustomThemeContext';
 
 const SECTIONS = [
   {
@@ -44,131 +44,129 @@ export default function ProfileScreen() {
     };
   }, [value]);
 
+  const { isDarkMode, toggleTheme } = useTheme();
+
   return (
-    <SafeAreaView >
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.profile}>
-          <View style={styles.profileHeader}>
-            <Image
-              alt=""
-              source={{
-                uri: tracks[0].album?.images?.[0].url,
-              }}
-              style={styles.profileAvatar} />
+    // <SafeAreaView>
+    <ScrollView contentContainerStyle={{ ...styles.container, backgroundColor: isDarkMode ? 'black' : 'white' }}>
+      <View style={styles.profile}>
+        <View style={styles.profileHeader}>
+          <Image
+            alt=""
+            source={{
+              uri: tracks[0].album?.images?.[0].url,
+            }}
+            style={styles.profileAvatar} />
 
-            <View>
-              <Text style={styles.profileName}>Parcidio Andre</Text>
-              <Text style={styles.profileHandle}>parcidioandre@gmail.com</Text>
-            </View>
+          <View>
+            <Text style={{ ...styles.profileName, color: isDarkMode ? 'white' : 'black' }}>Parcidio Andre</Text>
+            <Text style={styles.profileHandle}>parcidioandre@gmail.com</Text>
           </View>
-
-          <Pressable
-            onPress={() => {
-              // handle onPress
-            }}>
-            <View style={styles.profileAction}>
-              <Text style={styles.profileActionText}>Edit Profile</Text>
-              <Ionicons color="#fff" name="pencil" size={16} />
-            </View>
-          </Pressable>
         </View>
 
-        <View style={styles.content}>
-          <View style={styles.tabs}>
-            {tabs.map(({ name }: any, index) => {
-              const isActive = index === value;
-
-              return (
-                <View
-                  key={name}
-                  style={[
-                    styles.tabWrapper,
-                    isActive && { borderBottomColor: 'black' },
-                  ]}>
-                  <Pressable
-                    onPress={() => {
-                      setValue(index);
-                    }}>
-                    <View style={!isActive ? { ...styles.tab } : { ...styles.tab, backgroundColor: 'red' }}>
-
-                      <Text
-                        style={[
-                          styles.tabText,
-                          isActive && { color: 'white' },
-                        ]}>
-                        {name}
-                      </Text>
-                    </View>
-                  </Pressable>
-                </View>
-              );
-            })}
+        <Pressable
+          onPress={() => {
+            // handle onPress
+          }}>
+          <View style={{ ...styles.profileAction, backgroundColor: isDarkMode ? 'white' : 'black' }}>
+            <Text style={{ ...styles.profileActionText, color: isDarkMode ? 'black' : 'white' }}>Edit Profile</Text>
+            <Ionicons color={isDarkMode ? 'black' : 'white'} name="pencil" size={16} />
           </View>
+        </Pressable>
+      </View>
 
-          {items.map(({ label, type, value }: any, index) => (
-            <View
-              key={label}
-              style={[
-                styles.rowWrapper,
-                index === 0 && { borderTopWidth: 0 },
-              ]}>
-              <Pressable
-                onPress={() => {
-                  // handle onPress
-                }}>
-                <View style={styles.row}>
-                  <Text style={styles.rowLabel}>{label}</Text>
+      <View style={{ ...styles.content, borderColor: isDarkMode ? "white" : 'black' }}>
+        <View style={styles.tabs}>
+          {tabs.map(({ name }: any, index) => {
+            const isActive = index === value;
 
-                  <View style={styles.rowSpacer} />
+            return (
+              <View
+                key={name}
+                style={[
+                  styles.tabWrapper,
 
-                  {type === 'input' && (
-                    <Text style={styles.rowValue}>{value}</Text>
-                  )}
+                  isActive && { borderBottomColor: 'black' },
+                ]}>
+                <Pressable
+                  onPress={() => {
+                    setValue(index);
+                  }}>
+                  <View style={!isActive ? { ...styles.tab, backgroundColor: isDarkMode ? 'white' : 'black', } : { ...styles.tab, backgroundColor: 'red' }}>
 
-                  {type === 'boolean' && (
-                    <Switch trackColor={{ true: 'red', }} thumbColor="black" value={value} />
-                  )}
-
-                  {(type === 'input' || type === 'link') && (
-                    <Ionicons
-                      color="red"
-                      name="chevron-forward-sharp"
-                      size={20} />
-                  )}
-                </View>
-              </Pressable>
-            </View>
-          ))}
+                    <Text
+                      style={[
+                        styles.tabText,
+                        isDarkMode ? { color: 'black' } : { color: 'white' },
+                        isActive && { color: 'white' },
+                      ]}>
+                      {name}
+                    </Text>
+                  </View>
+                </Pressable>
+              </View>
+            );
+          })}
         </View>
-      </ScrollView>
-    </SafeAreaView>
+
+        {items.map(({ label, type, value }: any, index) => (
+          <View
+            key={label}
+            style={[
+              styles.rowWrapper,
+              isDarkMode ? { borderColor: 'white' } : { borderColor: '#2c2c2c' },
+              index === 0 && { borderTopWidth: 0 },
+            ]}>
+            <Pressable
+              onPress={() => {
+                // handle onPress
+              }}>
+              <View style={styles.row}>
+                <Text style={{ ...styles.rowLabel, color: isDarkMode ? 'white' : 'black' }}>{label}</Text>
+
+                <View style={styles.rowSpacer} />
+
+                {type === 'input' && (
+                  <Text style={styles.rowValue}>{value}</Text>
+                )}
+
+                {type === 'boolean' && (
+                  <Switch trackColor={{ true: 'red', }} thumbColor="red" value={label == 'Tema Escuro' && isDarkMode} onChange={label == 'Tema Escuro' ? toggleTheme : () => { }} />
+                )}
+
+                {(type === 'input' || type === 'link') && (
+                  <Ionicons
+                    color="red"
+                    name="chevron-forward-sharp"
+                    size={20} />
+                )}
+              </View>
+            </Pressable>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
+    // </SafeAreaView >
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 24,
+    flex: 1,
+
   },
   header: {
     paddingLeft: 24,
     paddingRight: 24,
     marginBottom: 12,
   },
-  title: {
-    fontSize: 32,
-    fontWeight: '700',
-    color: '#1d1d1d',
-    marginBottom: 6,
-  },
-  subtitle: {
-    fontSize: 15,
-    fontWeight: '500',
-    color: '#929292',
-  },
+
+
   content: {
-    backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderColor: '#e3e3e3',
+    marginHorizontal: 10,
+
   },
   tabs: {
     padding: 16,
@@ -180,10 +178,6 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingHorizontal: 24,
     paddingBottom: 24,
-    backgroundColor: '#fff',
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#e3e3e3',
   },
   profileHeader: {
     flexDirection: 'row',
@@ -195,13 +189,11 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 9999,
     borderWidth: 1,
-    borderColor: '#ccc',
     marginRight: 12,
   },
   profileName: {
     fontSize: 17,
     fontWeight: '600',
-    color: '#3d3d3d',
   },
   profileHandle: {
     marginTop: 4,
@@ -215,14 +207,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'black',
-    borderRadius: 12,
+    borderRadius: 6,
   },
   profileActionText: {
     marginRight: 8,
     fontSize: 15,
     fontWeight: '600',
-    color: '#fff',
   },
   /** Tab */
   tab: {
@@ -232,7 +222,6 @@ const styles = StyleSheet.create({
     padding: 10,
     position: 'relative',
     overflow: 'hidden',
-    backgroundColor: 'white',
     elevation: 1,
     borderRadius: 5,
   },
@@ -261,12 +250,10 @@ const styles = StyleSheet.create({
   },
   rowWrapper: {
     borderTopWidth: 1,
-    borderColor: '#e3e3e3',
   },
   rowLabel: {
     fontSize: 17,
     fontWeight: '500',
-    color: '#2c2c2c',
   },
   rowSpacer: {
     flexGrow: 1,
