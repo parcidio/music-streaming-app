@@ -58,7 +58,7 @@ function RootLayoutNav() {
         <PlayerProvider>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="profile" options={{ presentation: 'modal', headerShadowVisible: false }} />
+            <Stack.Screen name="profile" options={{ presentation: 'modal', headerShown: false }} />
             <Stack.Screen name="hits" options={{ presentation: 'modal', headerShown: false }} />
             <Stack.Screen name="newArtists" options={{ presentation: 'modal', headerShown: false }} />
             <Stack.Screen name="artists" options={{ presentation: 'modal', headerShown: false }} />

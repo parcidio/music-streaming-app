@@ -12,32 +12,46 @@ import { Link } from "expo-router";
 import { Icon } from "./Icon";
 import { DarkTheme, DefaultTheme, useNavigation } from "@react-navigation/native";
 import { useColorScheme } from "./useColorScheme.web";
+import { useTheme } from "../providers/CustomThemeContext";
 
 
-export function SearchBox({ search, setSearch, showProfile = false, showSearchBox = true, showBackButton = false }: any) {
-    const colorScheme = useColorScheme();
+export function SearchBox({ search, setSearch, title = "", showProfile = false, showSearchBox = true, showBackButton = false }: any) {
 
     const navigation = useNavigation();
+    const { isDarkMode } = useTheme();
 
-    const theme = colorScheme === 'light' ? DarkTheme : DefaultTheme
+
+
     return (
         <View style={styles.headerContainer}>
             {showBackButton && (<Pressable onPress={() => navigation.goBack()}>
-                <Icon name="arrow-back-sharp" color="black" />
+                <View style={{
+                    paddingVertical: 12,
+                }}>
+
+                    <Icon name="arrow-back-sharp" color={isDarkMode ? 'white' : 'black'} />
+                </View>
             </Pressable>)}
+            {!showSearchBox && title.length > 0 && (
+                <Text style={{ ...styles.title, color: isDarkMode ? 'white' : 'black' }}>
+                    {title}
+                </Text>
+            )}
             <View style={styles.header}>
                 {showSearchBox && (
                     <>
-                        <Icon name="search" color={theme} /><TextInput
+                        <Icon name="search" color={isDarkMode ? 'black' : 'white'} /><TextInput
                             value={search}
-                            placeholder="What do you want to listen to?"
+                            placeholder="Search..."
                             placeholderTextColor="gray"
                             onChangeText={setSearch}
                             style={styles.input} />
                     </>
                 )}
 
-                {search.length > 0 && (
+
+
+                {search?.length > 0 && (
                     <Text onPress={() => setSearch('')} style={styles.cancelText}>
                         Cancel
                     </Text>
@@ -72,6 +86,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginHorizontal: 14,
+    },
+    title: {
+        flex: 1,
+        paddingHorizontal: 16,
+        fontSize: 18,
+        fontWeight: "bold",
     },
     header: {
         flex: 1,

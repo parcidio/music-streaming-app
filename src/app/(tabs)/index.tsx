@@ -26,9 +26,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { HomeBanner } from "@/src/components/banner";
 import { SearchBox } from "@/src/components/searchBox";
 import Header from "@/src/components/Header";
+import { useTheme } from "@/src/providers/CustomThemeContext";
 
 
 const HomeScreen = () => {
+  const { isDarkMode } = useTheme();
 
   const [search, setSearch] = useState('');
   const genre = [
@@ -40,7 +42,10 @@ const HomeScreen = () => {
   ];
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{
+      ...styles.container, backgroundColor:
+        isDarkMode ? 'black' : 'white'
+    }}>
       {/* <View style={styles.header}> */}
       <SearchBox search={search} setSearch={setSearch} showProfile={true} />
       {/* </View> */}

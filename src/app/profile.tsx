@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import {
   StyleSheet,
-  SafeAreaView,
+
   ScrollView,
   View,
   Text,
@@ -10,9 +10,11 @@ import {
   Switch,
   Pressable,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from "@expo/vector-icons/";
 import { tracks } from '@/assets/data/tracks';
 import { useTheme } from '../providers/CustomThemeContext';
+import { SearchBox } from '../components/searchBox';
 
 const SECTIONS = [
   {
@@ -47,8 +49,8 @@ export default function ProfileScreen() {
   const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    // <SafeAreaView>
-    <ScrollView contentContainerStyle={{ ...styles.container, backgroundColor: isDarkMode ? 'black' : 'white' }}>
+    <SafeAreaView style={{ ...styles.container, backgroundColor: isDarkMode ? 'black' : 'white' }}>
+      <SearchBox title={"Perfil"} showSearchBox={false} showProfile={false} showBackButton={true} />
       <View style={styles.profile}>
         <View style={styles.profileHeader}>
           <Image
@@ -75,78 +77,80 @@ export default function ProfileScreen() {
         </Pressable>
       </View>
 
-      <View style={{ ...styles.content, borderColor: isDarkMode ? "white" : 'black' }}>
-        <View style={styles.tabs}>
-          {tabs.map(({ name }: any, index) => {
-            const isActive = index === value;
+      <ScrollView>
 
-            return (
-              <View
-                key={name}
-                style={[
-                  styles.tabWrapper,
+        <View style={{ ...styles.content, borderColor: isDarkMode ? "white" : 'black' }}>
+          <View style={styles.tabs}>
+            {tabs.map(({ name }: any, index) => {
+              const isActive = index === value;
 
-                  isActive && { borderBottomColor: 'black' },
-                ]}>
-                <Pressable
-                  onPress={() => {
-                    setValue(index);
-                  }}>
-                  <View style={!isActive ? { ...styles.tab, backgroundColor: isDarkMode ? 'white' : 'black', } : { ...styles.tab, backgroundColor: 'red' }}>
+              return (
+                <View
+                  key={name}
+                  style={[
+                    styles.tabWrapper,
 
-                    <Text
-                      style={[
-                        styles.tabText,
-                        isDarkMode ? { color: 'black' } : { color: 'white' },
-                        isActive && { color: 'white' },
-                      ]}>
-                      {name}
-                    </Text>
-                  </View>
-                </Pressable>
-              </View>
-            );
-          })}
-        </View>
+                    isActive && { borderBottomColor: 'black' },
+                  ]}>
+                  <Pressable
+                    onPress={() => {
+                      setValue(index);
+                    }}>
+                    <View style={!isActive ? { ...styles.tab, backgroundColor: isDarkMode ? 'white' : 'black', } : { ...styles.tab, backgroundColor: 'red' }}>
 
-        {items.map(({ label, type, value }: any, index) => (
-          <View
-            key={label}
-            style={[
-              styles.rowWrapper,
-              isDarkMode ? { borderColor: 'white' } : { borderColor: '#2c2c2c' },
-              index === 0 && { borderTopWidth: 0 },
-            ]}>
-            <Pressable
-              onPress={() => {
-                // handle onPress
-              }}>
-              <View style={styles.row}>
-                <Text style={{ ...styles.rowLabel, color: isDarkMode ? 'white' : 'black' }}>{label}</Text>
-
-                <View style={styles.rowSpacer} />
-
-                {type === 'input' && (
-                  <Text style={styles.rowValue}>{value}</Text>
-                )}
-
-                {type === 'boolean' && (
-                  <Switch trackColor={{ true: 'red', }} thumbColor="red" value={label == 'Tema Escuro' && isDarkMode} onChange={label == 'Tema Escuro' ? toggleTheme : () => { }} />
-                )}
-
-                {(type === 'input' || type === 'link') && (
-                  <Ionicons
-                    color="red"
-                    name="chevron-forward-sharp"
-                    size={20} />
-                )}
-              </View>
-            </Pressable>
+                      <Text
+                        style={[
+                          styles.tabText,
+                          isDarkMode ? { color: 'black' } : { color: 'white' },
+                          isActive && { color: 'white' },
+                        ]}>
+                        {name}
+                      </Text>
+                    </View>
+                  </Pressable>
+                </View>
+              );
+            })}
           </View>
-        ))}
-      </View>
-    </ScrollView>
-    // </SafeAreaView >
+
+          {items.map(({ label, type, value }: any, index) => (
+            <View
+              key={label}
+              style={[
+                styles.rowWrapper,
+                isDarkMode ? { borderColor: 'white' } : { borderColor: '#2c2c2c' },
+                index === 0 && { borderTopWidth: 0 },
+              ]}>
+              <Pressable
+                onPress={() => {
+                  // handle onPress
+                }}>
+                <View style={styles.row}>
+                  <Text style={{ ...styles.rowLabel, color: isDarkMode ? 'white' : 'black' }}>{label}</Text>
+
+                  <View style={styles.rowSpacer} />
+
+                  {type === 'input' && (
+                    <Text style={styles.rowValue}>{value}</Text>
+                  )}
+
+                  {type === 'boolean' && (
+                    <Switch trackColor={{ true: 'red', }} thumbColor="red" value={label == 'Tema Escuro' && isDarkMode} onChange={label == 'Tema Escuro' ? toggleTheme : () => { }} />
+                  )}
+
+                  {(type === 'input' || type === 'link') && (
+                    <Ionicons
+                      color="red"
+                      name="chevron-forward-sharp"
+                      size={20} />
+                  )}
+                </View>
+              </Pressable>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView >
   );
 }
 
@@ -160,8 +164,6 @@ const styles = StyleSheet.create({
     paddingRight: 24,
     marginBottom: 12,
   },
-
-
   content: {
     borderBottomWidth: 1,
     borderColor: '#e3e3e3',
