@@ -9,6 +9,8 @@ import { useColorScheme } from '../../components/useColorScheme';
 import { useClientOnlyValue } from '../../components/useClientOnlyValue';
 import { BottomTabBar } from '@react-navigation/bottom-tabs'
 import Player from '@/src/components/Player';
+import { useTheme } from '@/src/providers/CustomThemeContext';
+import { darkColors, lightColors } from '@/src/theme';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 export function TabBarIcon(props: {
@@ -20,6 +22,8 @@ export function TabBarIcon(props: {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const { isDarkMode, toggleTheme } = useTheme();
+
 
   return (
     <Tabs
@@ -28,6 +32,7 @@ export default function TabLayout() {
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
+        tabBarStyle: { backgroundColor: isDarkMode ? darkColors.bottomBar : lightColors.bottomBar, borderTopColor: isDarkMode ? darkColors.border : lightColors.border, }, // Set your desired background color here
       }}
       tabBar={(props) => <View><Player /><BottomTabBar  {...props} /></View>} >
       <Tabs.Screen

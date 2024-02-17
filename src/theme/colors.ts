@@ -65,7 +65,9 @@ export const darkColors = {
   tabText: palette.dark,
   icon: palette.light,
   searchBar: palette.darkAccent,
-  card: palette.darkAccent
+  card: palette.darkAccent,
+  border: palette.darkAccent,
+  bottomBar:  palette.dark
  
 
 };
@@ -86,7 +88,9 @@ export const lightColors = {
   tabText: palette.light,
   icon: palette.dark,
   searchBar: palette.lightAccent,
-  card: palette.lightAccent
+  card: palette.lightAccent,
+  border: palette.lightAccent,
+  bottomBar:  palette.light
 
 
 
