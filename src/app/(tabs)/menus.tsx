@@ -8,20 +8,25 @@ import MenuItem from '@/src/components/menuItem';
 import { menus } from '@/assets/data/menus';
 import { Link } from 'expo-router';
 import Animated from "react-native-reanimated"
+import { useTheme } from '@/src/providers/CustomThemeContext';
+import { darkColors, lightColors } from '@/src/theme';
+import { SearchBox } from '@/src/components/searchBox';
 
 export default function MenusScreen() {
+    const { isDarkMode } = useTheme();
 
     return (
-
-        <Animated.ScrollView
-            scrollEventThrottle={16}
-            showsVerticalScrollIndicator={false}
-            style={{ backgroundColor: "transparent" }}>
-            {menus.map((item, index) => (
-                <MenuItem link={item.link} text={item.text} color={item.color} key={index} />
-            ))}
-        </Animated.ScrollView>
-
+        <SafeAreaView style={{ ...styles.container, backgroundColor: isDarkMode ? darkColors.background : lightColors.background }}>
+            <SearchBox showBackButton={false} showSearchBox={false} title={"Coleções"} />
+            <Animated.ScrollView
+                scrollEventThrottle={16}
+                showsVerticalScrollIndicator={false}
+                style={{ backgroundColor: isDarkMode ? darkColors.background : lightColors.background }}>
+                {menus.map((item, index) => (
+                    <MenuItem link={item.link} text={item.text} color={item.color} key={index} />
+                ))}
+            </Animated.ScrollView>
+        </SafeAreaView>
     );
 }
 

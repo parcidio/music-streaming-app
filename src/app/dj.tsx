@@ -6,29 +6,39 @@ import { useState } from 'react';
 import { tracks } from '@/assets/data/tracks';
 import ArtistCard from '../components/ArtistCard';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../components/Header';
+import { useTheme } from '../providers/CustomThemeContext';
+import { darkColors, lightColors } from '../theme';
 
 export default function djScreen() {
     const [search, setSearch] = useState('');
+    const { isDarkMode, toggleTheme } = useTheme();
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={{
+            ...styles.container, backgroundColor:
+                isDarkMode ? darkColors.background : lightColors.background
+        }}>
             <SearchBox search={search} setSearch={setSearch} showProfile={true} showBackButton={true} />
-            <View style={styles.container}>
-                <Text
-                    style={styles.heading}
-                >
-                    Os melhores Mixes
-                </Text>
+            {/* <View style={{
+                backgroundColor:
+                    isDarkMode ? darkColors.background : lightColors.background
+            }}> */}
+            <Header heading={"Os melhores Mixes"} showLink={false} link={'/'} linkText={""} />
 
-                <ScrollView>
-                    <View style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
 
-                        {tracks.map((item, index) => (
-                            <ArtistCard track={item} key={index} />
-                        ))}
-                    </View>
-                </ScrollView>
-            </View>
+            <ScrollView>
+                <View style={{
+                    display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "center", backgroundColor:
+                        isDarkMode ? darkColors.background : lightColors.background
+                }}>
+
+                    {tracks.map((item, index) => (
+                        <ArtistCard track={item} key={index} />
+                    ))}
+                </View>
+            </ScrollView>
+            {/* </View> */}
         </SafeAreaView>
     );
 }
@@ -36,8 +46,8 @@ export default function djScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
     },
     title: {
         fontSize: 20,

@@ -48,6 +48,10 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import LibraryTracksScreen from './tracks';
 import LibraryAlbumsScreen from './albums';
 import LibraryArtistsScreen from './artists';
+import { darkColors, lightColors } from '@/src/theme';
+import { useTheme } from '@/src/providers/CustomThemeContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { SearchBox } from '@/src/components/searchBox';
 
 const { width, height } = Dimensions.get('window');
 const LOGO_WIDTH = 220;
@@ -58,17 +62,19 @@ const CIRCLE_SIZE = width * 0.6;
 const Tab = createMaterialTopTabNavigator();
 
 export default function LibraryScreen() {
+  const { isDarkMode } = useTheme();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={{ ...styles.container, backgroundColor: isDarkMode ? darkColors.background : lightColors.background }}>
+      <SearchBox showBackButton={false} showSearchBox={false} title={"Library"} />
       <Tab.Navigator
 
         initialRouteName="tracks"
         screenOptions={{
-          tabBarActiveTintColor: 'black',
+          tabBarActiveTintColor: isDarkMode ? darkColors.text : lightColors.text,
           tabBarLabelStyle: { fontSize: 12 },
-          tabBarIndicatorStyle: { backgroundColor: 'red' },
-          tabBarStyle: { backgroundColor: 'white', elevation: 0, },
+          tabBarIndicatorStyle: { backgroundColor: darkColors.activeTab },
+          tabBarStyle: { backgroundColor: isDarkMode ? darkColors.background : lightColors.background, elevation: 0, },
         }}
       >
         <Tab.Screen
@@ -88,7 +94,7 @@ export default function LibraryScreen() {
           options={{ tabBarLabel: 'Artistas' }}
         />
       </Tab.Navigator>
-    </View>
+    </SafeAreaView>
   );
 }
 

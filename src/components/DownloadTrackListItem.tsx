@@ -5,6 +5,8 @@ import Modal from 'react-native-modal'; // Import the Modal component
 import { StyleSheet } from 'react-native';
 import { TrackListItemProps } from '@/assets/types';
 import { usePlayerContext } from '../providers/PlayerProvider';
+import { useTheme } from '../providers/CustomThemeContext';
+import { darkColors, lightColors } from '../theme';
 
 interface TrackItemProps {
   track: any; // Adjust the type based on your data structure
@@ -33,6 +35,8 @@ const DownloadTrackItem: React.FC<TrackListItemProps> = ({ track }: TrackListIte
     toggleModal(); // Close the modal after deleting
   };
 
+  const { isDarkMode } = useTheme();
+
   return (
     <View style={
       track === currentTrack
@@ -45,8 +49,9 @@ const DownloadTrackItem: React.FC<TrackListItemProps> = ({ track }: TrackListIte
       >
         {image && <Image source={{ uri: image.url }} style={styles.image} />}
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{track.name}</Text>
-          <Text style={styles.subtitle}>{track.artists[0]?.name}</Text>
+          <Text style={{ ...styles.title, color: isDarkMode ? darkColors.text : lightColors.text }}
+            numberOfLines={1} ellipsizeMode="tail">{track.name}</Text>
+          <Text style={{ ...styles.subtitle, color: isDarkMode ? darkColors.mutedText : lightColors.mutedText }}>{track.artists[0]?.name}</Text>
         </View>
 
       </Pressable>
@@ -97,8 +102,8 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'lightwhite',
     gap: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'column',
+    // alignItems: 'center',
 
   },
   title: {

@@ -27,7 +27,7 @@ import { HomeBanner } from "@/src/components/banner";
 import { SearchBox } from "@/src/components/searchBox";
 import Header from "@/src/components/Header";
 import { useTheme } from "@/src/providers/CustomThemeContext";
-
+import { darkColors, lightColors } from "@/src/theme";
 
 const HomeScreen = () => {
   const { isDarkMode } = useTheme();
@@ -44,7 +44,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={{
       ...styles.container, backgroundColor:
-        isDarkMode ? 'black' : 'white'
+        isDarkMode ? darkColors.background : lightColors.background
     }}>
       {/* <View style={styles.header}> */}
       <SearchBox search={search} setSearch={setSearch} showProfile={true} />
@@ -52,32 +52,32 @@ const HomeScreen = () => {
 
       <ScrollView>
         {/* Trending */}
-        <Header heading={"Trending"} link={"/hits"} linkText={"Mais"} />
+        <Header heading={"Trending"} link={"/hits"} linkText={"Mais"} showLink={true} />
 
         <HomeBanner items={bannerData} pagination={true} autoPlay={false} />
         {/* Generos */}
-        <Header heading={"Generos"} link={"/menus"} linkText={"Mais"} />
+        <Header heading={"Generos"} link={"/menus"} linkText={"Mais"} showLink={true} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {genre.map((item) => (
             <GenreCard title={item.title} />
           ))}
         </ScrollView>
         {/* Os Top Artistas */}
-        <Header heading={"Os Top Artistas"} link={"/artists"} linkText={"Mais"} />
+        <Header heading={"Os Top Artistas"} link={"/artists"} linkText={"Mais"} showLink={true} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {tracks.map((item, index) => (
             <ArtistCard track={item} key={index} />
           ))}
         </ScrollView>
         {/*  Albums populares */}
-        <Header heading={"Albums populares"} link={"/albums"} linkText={"Mais"} />
+        <Header heading={"Albums populares"} link={"/albums"} linkText={"Mais"} showLink={true} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {tracks.map((item, index) => (
             <RecentlyPlayedCard track={item} key={index} />
           ))}
         </ScrollView>
         {/* Novos lançamentos */}
-        <Header heading={"Novos lançamentos"} link={"/newReleases"} linkText={"Mais"} />
+        <Header heading={"Novos lançamentos"} link={"/newReleases"} linkText={"Mais"} showLink={true} />
 
         <FlatList
           data={tracks}

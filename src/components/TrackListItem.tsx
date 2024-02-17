@@ -1,56 +1,58 @@
 
-import { Text, View, StyleSheet,  Pressable, Image } from 'react-native';
+import { Text, View, StyleSheet, Pressable, Image } from 'react-native';
 import { Track, TrackListItemProps } from '@/assets/types';
-import {usePlayerContext} from '../providers/PlayerProvider'
+import { usePlayerContext } from '../providers/PlayerProvider'
+import { useTheme } from "../providers/CustomThemeContext";
+import { darkColors, lightColors } from "../theme";
 
-export default function TrackListItem ({track} : TrackListItemProps){
-    const image = track.album?.images?.[0];
-    const { currentTrack,setCurrentTrack } = usePlayerContext();
+export default function TrackListItem({ track }: TrackListItemProps) {
+  const image = track.album?.images?.[0];
+  const { currentTrack, setCurrentTrack } = usePlayerContext();
 
-    return (
-      <Pressable
-        onPress={() => setCurrentTrack(track)}
-        style={track == currentTrack? styles.containerActive : styles.container}
-      >
-        {image && <Image source={{ uri: image.url }} style={styles.image} />}
-        <View>
-          <Text style={styles.title}>{track.name}</Text>
-          <Text style={styles.subtitle}>{track.artists[0]?.name}</Text>
-        </View>
-      </Pressable>
-    );
+  const { isDarkMode } = useTheme();
+
+  return (
+    <Pressable
+      onPress={() => setCurrentTrack(track)}
+      style={styles.container}
+    >
+      {image && <Image source={{ uri: image.url }} style={styles.image} />}
+      <View style={styles.containerActive}>
+        <Text style={{ ...styles.title, color: isDarkMode ? darkColors.text : lightColors.text }}
+          numberOfLines={1} ellipsizeMode="tail">{track.name}</Text>
+        <Text style={{ ...styles.subtitle, color: isDarkMode ? darkColors.mutedText : lightColors.mutedText }}>{track.artists[0]?.name}</Text>
+      </View>
+    </Pressable>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      width: '100%',
-      padding: 10,
-      gap: 5,
-      flexDirection: 'row',
-      alignItems: 'center',
-      
-    },
-    containerActive: {
-      width: '100%',
-      padding: 10,
-      backgroundColor: 'lightwhite',
-      gap: 5,
-      flexDirection: 'row',
-      alignItems: 'center',
-      
-    },
-    title: {
-      fontWeight: '500',
-      color: 'black',
-      fontSize: 16,
-    },
-    subtitle: {
-      color: 'gray',
-    },
-    image: {
-      width: 50,
-      aspectRatio: 1,
-      marginRight: 10,
-      borderRadius: 5,
-    },
-  });
+  container: {
+    width: '100%',
+    padding: 10,
+    gap: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+
+  },
+  containerActive: {
+    width: '75%',
+
+    gap: 5,
+  },
+  title: {
+    fontWeight: '500',
+    // color: 'black',
+    flexWrap: "wrap",
+    fontSize: 14,
+  },
+  subtitle: {
+    fontSize: 14,
+  },
+  image: {
+    width: 50,
+    aspectRatio: 1,
+    marginRight: 10,
+    borderRadius: 5,
+  },
+});

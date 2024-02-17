@@ -7,29 +7,39 @@ import { tracks } from '@/assets/data/tracks';
 import ArtistCard from '../components/ArtistCard';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AlbumCard from '../components/AlbumCard';
+import Header from '../components/Header';
+import { useTheme } from '../providers/CustomThemeContext';
+import { darkColors, lightColors } from '../theme';
 
 export default function NewReleasesScreen() {
   const [search, setSearch] = useState('');
+  const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{
+      ...styles.container, backgroundColor:
+        isDarkMode ? darkColors.background : lightColors.background
+    }}>
       <SearchBox search={search} setSearch={setSearch} showProfile={true} showBackButton={true} />
-      <View style={styles.container}>
-        <Text
-          style={styles.heading}
-        >
-          Novos lançamentos
-        </Text>
+      {/* <View style={{
+              backgroundColor:
+                  isDarkMode ? darkColors.background : lightColors.background
+          }}> */}
+      <Header heading={"Novos lançamentos"} showLink={false} link={'/'} linkText={""} />
 
-        <ScrollView>
-          <View style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
 
-            {tracks.map((item, index) => (
-              <AlbumCard track={item} key={index} />
-            ))}
-          </View>
-        </ScrollView>
-      </View>
+      <ScrollView>
+        <View style={{
+          display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "center", backgroundColor:
+            isDarkMode ? darkColors.background : lightColors.background
+        }}>
+
+          {tracks.map((item, index) => (
+            <AlbumCard track={item} key={index} />
+          ))}
+        </View>
+      </ScrollView>
+      {/* </View> */}
     </SafeAreaView>
   );
 }
@@ -37,8 +47,8 @@ export default function NewReleasesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
   },
   title: {
     fontSize: 20,

@@ -15,7 +15,7 @@ import { Ionicons } from "@expo/vector-icons/";
 import { tracks } from '@/assets/data/tracks';
 import { useTheme } from '../providers/CustomThemeContext';
 import { SearchBox } from '../components/searchBox';
-
+import { darkColors, lightColors } from '../theme';
 const SECTIONS = [
   {
     header: 'Definições',
@@ -49,7 +49,7 @@ export default function ProfileScreen() {
   const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <SafeAreaView style={{ ...styles.container, backgroundColor: isDarkMode ? 'black' : 'white' }}>
+    <SafeAreaView style={{ ...styles.container, backgroundColor: isDarkMode ? darkColors.background : lightColors.background }}>
       <SearchBox title={"Perfil"} showSearchBox={false} showProfile={false} showBackButton={true} />
       <View style={styles.profile}>
         <View style={styles.profileHeader}>
@@ -61,7 +61,7 @@ export default function ProfileScreen() {
             style={styles.profileAvatar} />
 
           <View>
-            <Text style={{ ...styles.profileName, color: isDarkMode ? 'white' : 'black' }}>Parcidio Andre</Text>
+            <Text style={{ ...styles.profileName, color: isDarkMode ? darkColors.text : lightColors.text }}>Parcidio Andre</Text>
             <Text style={styles.profileHandle}>parcidioandre@gmail.com</Text>
           </View>
         </View>
@@ -70,16 +70,15 @@ export default function ProfileScreen() {
           onPress={() => {
             // handle onPress
           }}>
-          <View style={{ ...styles.profileAction, backgroundColor: isDarkMode ? 'white' : 'black' }}>
-            <Text style={{ ...styles.profileActionText, color: isDarkMode ? 'black' : 'white' }}>Edit Profile</Text>
-            <Ionicons color={isDarkMode ? 'black' : 'white'} name="pencil" size={16} />
+          <View style={{ ...styles.profileAction, backgroundColor: isDarkMode ? darkColors.button : lightColors.button }}>
+            <Text style={{ ...styles.profileActionText, color: isDarkMode ? darkColors.buttonText : lightColors.buttonText }}>Edit Profile</Text>
+            <Ionicons color={isDarkMode ? darkColors.buttonIcon : lightColors.buttonIcon} name="pencil" size={16} />
           </View>
         </Pressable>
       </View>
 
       <ScrollView>
-
-        <View style={{ ...styles.content, borderColor: isDarkMode ? "white" : 'black' }}>
+        <View style={styles.content}>
           <View style={styles.tabs}>
             {tabs.map(({ name }: any, index) => {
               const isActive = index === value;
@@ -90,19 +89,19 @@ export default function ProfileScreen() {
                   style={[
                     styles.tabWrapper,
 
-                    isActive && { borderBottomColor: 'black' },
+                    isActive && { borderBottomColor: darkColors.activeTab },
                   ]}>
                   <Pressable
                     onPress={() => {
                       setValue(index);
                     }}>
-                    <View style={!isActive ? { ...styles.tab, backgroundColor: isDarkMode ? 'white' : 'black', } : { ...styles.tab, backgroundColor: 'red' }}>
+                    <View style={!isActive ? { ...styles.tab, backgroundColor: isDarkMode ? darkColors.tab : lightColors.tab, } : { ...styles.tab, backgroundColor: isDarkMode ? darkColors.activeTab : lightColors.activeTab }}>
 
                       <Text
                         style={[
                           styles.tabText,
-                          isDarkMode ? { color: 'black' } : { color: 'white' },
-                          isActive && { color: 'white' },
+                          isDarkMode ? { color: darkColors.tabText } : { color: lightColors.tabText },
+                          isActive && { color: lightColors.tabText },
                         ]}>
                         {name}
                       </Text>
@@ -126,7 +125,7 @@ export default function ProfileScreen() {
                   // handle onPress
                 }}>
                 <View style={styles.row}>
-                  <Text style={{ ...styles.rowLabel, color: isDarkMode ? 'white' : 'black' }}>{label}</Text>
+                  <Text style={{ ...styles.rowLabel, color: isDarkMode ? 'white' : darkColors.background }}>{label}</Text>
 
                   <View style={styles.rowSpacer} />
 

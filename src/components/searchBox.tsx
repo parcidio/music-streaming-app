@@ -13,6 +13,7 @@ import { Icon } from "./Icon";
 import { DarkTheme, DefaultTheme, useNavigation } from "@react-navigation/native";
 import { useColorScheme } from "./useColorScheme.web";
 import { useTheme } from "../providers/CustomThemeContext";
+import { darkColors, lightColors } from '../theme';
 
 
 export function SearchBox({ search, setSearch, title = "", showProfile = false, showSearchBox = true, showBackButton = false }: any) {
@@ -23,36 +24,37 @@ export function SearchBox({ search, setSearch, title = "", showProfile = false, 
 
 
     return (
-        <View style={styles.headerContainer}>
+        <View style={{ ...styles.headerContainer, }}>
             {showBackButton && (<Pressable onPress={() => navigation.goBack()}>
                 <View style={{
                     paddingVertical: 12,
                 }}>
 
-                    <Icon name="arrow-back-sharp" color={isDarkMode ? 'white' : 'black'} />
+                    <Icon name="arrow-back-sharp" color={isDarkMode ? darkColors.icon : lightColors.icon} />
                 </View>
             </Pressable>)}
             {!showSearchBox && title.length > 0 && (
-                <Text style={{ ...styles.title, color: isDarkMode ? 'white' : 'black' }}>
+                <Text style={{ ...styles.title, color: isDarkMode ? darkColors.text : lightColors.text }}>
                     {title}
                 </Text>
             )}
-            <View style={styles.header}>
+            <View style={{ ...styles.header, backgroundColor: isDarkMode ? darkColors.searchBar : lightColors.searchBar }}>
                 {showSearchBox && (
                     <>
-                        <Icon name="search" color={isDarkMode ? 'black' : 'white'} /><TextInput
+                        <Icon name="search" color={isDarkMode ? darkColors.icon : lightColors.icon} />
+                        <TextInput
                             value={search}
                             placeholder="Search..."
                             placeholderTextColor="gray"
                             onChangeText={setSearch}
-                            style={styles.input} />
+                            style={{ ...styles.input, color: isDarkMode ? darkColors.text : lightColors.text }} />
                     </>
                 )}
 
 
 
                 {search?.length > 0 && (
-                    <Text onPress={() => setSearch('')} style={styles.cancelText}>
+                    <Text onPress={() => setSearch('')} style={{ ...styles.cancelText, color: isDarkMode ? darkColors.activeText : lightColors.activeText }}>
                         Cancel
                     </Text>
                 )}
@@ -86,6 +88,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginHorizontal: 14,
+        marginTop: 10
     },
     title: {
         flex: 1,
@@ -102,17 +105,16 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 10,
         paddingHorizontal: 10,
+        elevation: 0,
     },
 
     input: {
         flex: 1,
         marginHorizontal: 10,
-        fontSize: 16,
+        fontSize: 14,
         paddingVertical: 8,
-        color: 'black',
     },
     cancelText: {
-        color: 'red',
         marginLeft: 10,
     },
 

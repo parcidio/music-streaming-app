@@ -1,9 +1,12 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import { TrackListItemProps } from "@/assets/types";
-
+import { useTheme } from "../providers/CustomThemeContext";
+import { darkColors, lightColors } from "../theme";
 
 const AlbumCard = ({ track }: TrackListItemProps) => {
+  const { isDarkMode } = useTheme();
+
   const image = track.album?.images?.[0];
 
   return (
@@ -14,7 +17,7 @@ const AlbumCard = ({ track }: TrackListItemProps) => {
         source={{ uri: image.url }}
       />
       <Text
-        style={styles.title}
+        style={{ ...styles.title, color: isDarkMode ? darkColors.text : lightColors.text }}
 
         numberOfLines={1} ellipsizeMode="tail"
 
@@ -32,7 +35,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 13,
     fontWeight: "500",
-    color: "black",
     marginTop: 10,
     width: 100, // Set the desired width
     flexWrap: 'wrap',

@@ -37,7 +37,7 @@ export type Genre = {
   title: String
 }
 
-export type HrefType = "/newReleases"| "/menus" | "/albums" | "/artists" | "/hits" | "/newArtists" | "/surpriseMe"| "/dj";
+export type HrefType = "/" | "/newReleases"| "/menus" | "/albums" | "/artists" | "/hits" | "/newArtists" | "/surpriseMe"| "/dj";
 
 
 export type Menu = {
@@ -50,4 +50,5 @@ export type HeaderProps = {
   link: HrefType 
   linkText: String
   heading: string
+  showLink: boolean
 }

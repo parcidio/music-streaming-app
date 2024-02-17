@@ -52,7 +52,7 @@ export default function TabLayout() {
 
         options={{
           title: 'Coleções',
-          headerShown: true,
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="folder" color={color} />,
         }}
       />
@@ -67,6 +67,7 @@ export default function TabLayout() {
         name="library"
         options={{
           title: 'Library',
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
         }}
       />

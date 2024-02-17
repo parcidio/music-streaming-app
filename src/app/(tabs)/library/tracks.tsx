@@ -3,6 +3,9 @@ import { Text, View } from '../../../components/Themed';
 import AlbumCard from '@/src/components/AlbumCard';
 import { tracks } from '@/assets/data/tracks';
 import { useMemo, useState } from 'react';
+import { useTheme } from '@/src/providers/CustomThemeContext';
+import { darkColors, lightColors } from '@/src/theme';
+import Header from '@/src/components/Header';
 
 const SECTIONS = [
     {
@@ -73,57 +76,54 @@ export default function LibraryTracksScreen() {
         };
     }, [value]);
 
+
+    const { isDarkMode } = useTheme();
+
+
     return (
-        <View style={styles.container}>
-            <View style={styles.content}>
-                <View style={styles.tabs}>
-                    {tabs.map(({ name }: any, index) => {
-                        const isActive = index === value;
+        // <View style={{ ...styles.container, backgroundColor: "red" }}>
+        <View style={{ ...styles.content, backgroundColor: isDarkMode ? darkColors.background : lightColors.background }}>
+            <View style={{ ...styles.tabs, backgroundColor: isDarkMode ? darkColors.background : lightColors.background }}>
+                {tabs.map(({ name }: any, index) => {
+                    const isActive = index === value;
 
-                        return (
-                            <View
-                                key={name}
-                                style={[
-                                    styles.tabWrapper,
+                    return (
+                        <View
+                            key={name}
+                            style={{
+                                ...styles.tabWrapper,
+                                backgroundColor: isDarkMode ? darkColors.background : lightColors.background
+                            }}>
+                            <Pressable
+                                onPress={() => {
+                                    setValue(index);
+                                }}>
+                                <View style={!isActive ? { ...styles.tab, backgroundColor: isDarkMode ? darkColors.tab : lightColors.tab } : { ...styles.tab, backgroundColor: 'red' }}>
 
-                                ]}>
-                                <Pressable
-                                    onPress={() => {
-                                        setValue(index);
-                                    }}>
-                                    <View style={!isActive ? { ...styles.tab } : { ...styles.tab, backgroundColor: 'red' }}>
-
-                                        <Text
-                                            style={[
-                                                styles.tabText,
-                                                isActive && { color: 'white' },
-                                            ]}>
-                                            {name}
-                                        </Text>
-                                    </View>
-                                </Pressable>
-                            </View>
-                        );
-                    })}
-                </View>
-
-                <Text
-                    style={styles.heading}
-                >
-                    {currentTab}
-
-                </Text>
-
-                <ScrollView>
-                    <View style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "center", }}>
-                        {items.map((item, index) => (
-                            <AlbumCard
-                                track={item} key={index} />
-                        ))}
-                    </View>
-                </ScrollView>
+                                    <Text
+                                        style={[
+                                            styles.tabText,
+                                            isActive && { color: isDarkMode ? darkColors.text : lightColors.text },
+                                        ]}>
+                                        {name}
+                                    </Text>
+                                </View>
+                            </Pressable>
+                        </View>
+                    );
+                })}
             </View>
+            <Header heading={currentTab} showLink={false} link={'/'} linkText={""} />
+            <ScrollView>
+                <View style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "center", backgroundColor: isDarkMode ? darkColors.background : lightColors.background }}>
+                    {items.map((item, index) => (
+                        <AlbumCard
+                            track={item} key={index} />
+                    ))}
+                </View>
+            </ScrollView>
         </View>
+        /* </View> */
     );
 }
 

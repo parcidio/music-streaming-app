@@ -1,37 +1,12 @@
-// TODO: write documentation for colors and palette in own markdown file and add links from here
-
 const palette = {
-  neutral100: "#FFFFFF",
-  neutral200: "#F4F2F1",
-  neutral300: "#d4d4d4",
-  neutral400: "#a3a3a3",
-  neutral500: "#737373",
-  neutral600: "#52525b",
-  neutral700: "#404040",
-  neutral800: "#262626",
-  neutral900: "#000000",
-
-  primary100: "#FFD6CE",
-  primary200: "#FFA39C",
-  primary300: "#FF6C6F",
-  primary400: "#FF475D",
-  primary500: "#FF0A3F",
-  primary600: "#DB0749",
-  primary700: "#B7054D",
-  primary800: "#93034C",
-  primary900: "#7A014A",
-
-  secondary100: "#DCDDE9",
-  secondary200: "#BCC0D6",
-  secondary300: "#9196B9",
-  secondary400: "#626894",
-  secondary500: "#41476E",
-
-  accent100: "#FFEED4",
-  accent200: "#FFE1B2",
-  accent300: "#FDD495",
-  accent400: "#FBC878",
-  accent500: "#FFBB50",
+  light: "#FFFFFF",
+  dark: "#000000",
+  primary: "red",
+  secondary: "gray",
+  transparent: "rgba(0,0,0,0)",
+ 
+  darkAccent: "rgba(255,255,255,0.15)",
+  lightAccent: "rgba(0,0,0,0.05)",
 
   angry100: "#F2D6CD",
   angry500: "#C03403",
@@ -42,7 +17,7 @@ const palette = {
   success100: "#EEFDD7",
   success200: "#D8FCAF",
   success300: "#BBF887",
-  success400: "#9EF268",
+  success400: "#9Ef268",
   success500: "#73EA38",
   success600: "#53C928",
   success700: "#38A81C",
@@ -69,109 +44,52 @@ const palette = {
   warning800: "#938405",
   warning900: "#7A6C03",
 
-  danger100: "#FFD8D7",
-  danger200: "#FFB0B5",
-  danger300: "#FF889C",
-  danger400: "#FF6B92",
-  danger500: "#FF3A82",
-  danger600: "#DB2A7C",
-  danger700: "#B71D74",
-  danger800: "#931268",
-  danger900: "#7A0B5F",
+ 
 
   redalternative: "#DA324B"
-}
+};
 
-export const  darkColors = {
- /**
-   * The palette is available to use, but prefer using the name.
-   * This is only included for rare, one-off cases. Try to use
-   * semantic names as much as possible.
-   */
- palette,
- /**
-  * A helper for making something see-thru.
-  */
- transparent: "rgba(0, 0, 0, 0)",
- /**
-  * The default text color in many components.
-  */
- text: palette.neutral900,
- /**
-  * Secondary text information.
-  */
- textDim: palette.neutral600,
- /**
-  * The default color of the screen background.
-  */
- background: palette.neutral100,
- /**
-  * The default border color.
-  */
- border: palette.neutral400,
- /**
-  * The main tinting color.
-  */
- tint: palette.primary500,
- /**
-  * A subtle color used for lines.
-  */
- separator: palette.neutral300,
- /**
-  * Error messages.
-  */
- error: palette.angry500,
- /**
-  * Error Background.
-  *
-  */
- errorBackground: palette.angry100,
-}
-
-export const  lightColors = {
-  /**
-   * The palette is available to use, but prefer using the name.
-   * This is only included for rare, one-off cases. Try to use
-   * semantic names as much as possible.
-   */
+export const darkColors = {
   palette,
-  /**
-   * A helper for making something see-thru.
-   */
-  transparent: "rgba(0, 0, 0, 0)",
-  /**
-   * The default text color in many components.
-   */
-  text: palette.neutral100,
-  /**
-   * Secondary text information.
-   */
-  textDim: palette.neutral600,
-  /**
-   * The default color of the screen background.
-   */
-  background: palette.neutral900,
-  /**
-   * The default border color.
-   */
-  border: palette.neutral400,
-  /**
-   * The main tinting color.
-   */
-  tint: palette.primary500,
-  /**
-   * A subtle color used for lines.
-   */
-  separator: palette.neutral300,
-  /**
-   * Error messages.
-   */
-  error: palette.angry500,
-  /**
-   * Error Background.
-   *
-   */
-  errorBackground: palette.angry100,
+  transparent: palette.transparent,
+  text: palette.light,
+  mutedText: palette.secondary,
+  activeText: palette.primary,
+  background: palette.dark,
+  button: palette.light,
+  buttonText: palette.dark,
+  buttonIcon: palette.dark,
+  activeTab: palette.primary,
+  activeTabText: palette.light,
+  tab: palette.light,
+  tabText: palette.dark,
+  icon: palette.light,
+  searchBar: palette.darkAccent,
+  card: palette.darkAccent
+ 
 
-  // icon
-}
+};
+
+export const lightColors = {
+  palette,
+  transparent: palette.transparent,
+  text: palette.dark,
+  mutedText: palette.secondary,
+  activeText: palette.primary,
+  background: palette.light,
+  button: palette.dark,
+  buttonText: palette.light,
+  buttonIcon: palette.light,
+  activeTab: palette.primary,
+  activeTabText: palette.light,
+  tab: palette.dark,
+  tabText: palette.light,
+  icon: palette.dark,
+  searchBar: palette.lightAccent,
+  card: palette.lightAccent
+
+
+
+
+
+};

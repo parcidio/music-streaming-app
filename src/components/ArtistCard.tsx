@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import { TrackListItemProps } from "@/assets/types";
+import { useTheme } from "../providers/CustomThemeContext";
+import { darkColors, lightColors } from "../theme";
 
+const ArtistCard = ({ track }: TrackListItemProps) => {
+  const { isDarkMode } = useTheme();
 
-const ArtistCard = ({track} : TrackListItemProps) => {
-    const image = track.album?.images?.[0];
+  const image = track.album?.images?.[0];
 
   return (
     <View style={{ margin: 10 }}>
@@ -14,10 +17,10 @@ const ArtistCard = ({track} : TrackListItemProps) => {
         source={{ uri: image.url }}
       />
       <Text
-        style={styles.title}
-        
+        style={{ ...styles.title, color: isDarkMode ? darkColors.text : lightColors.text }}
+
         numberOfLines={1} ellipsizeMode="tail"
-        
+
       >
         {track?.name}
       </Text>
@@ -28,12 +31,11 @@ const ArtistCard = ({track} : TrackListItemProps) => {
 export default ArtistCard;
 
 const styles = StyleSheet.create({
-    title:{
-        fontSize: 13,
-        fontWeight: "500",
-        color: "black",
-        marginTop: 10,
-        width: 100, // Set the desired width
-        flexWrap: 'wrap',
-      }
+  title: {
+    fontSize: 12,
+    textAlign: "center",
+    marginTop: 10,
+    width: 100, // Set the desired width
+    flexWrap: 'wrap',
+  }
 });
