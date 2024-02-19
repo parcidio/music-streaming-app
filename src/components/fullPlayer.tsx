@@ -21,18 +21,27 @@ interface FullPlayerProps {
     setIsPlaying: CallableFunction,
     isPlaying: boolean,
     currentTrack: Track,
+    onPause: () => void,
 
 }
 
-const FullPlayer = ({ playerFullScreen, setPlayerFullScreen, isPlaying, setIsPlaying, currentTrack }: FullPlayerProps) => {
+const FullPlayer = ({ playerFullScreen, setPlayerFullScreen, isPlaying, onPause, setIsPlaying, currentTrack }: FullPlayerProps) => {
+
+
+
+
+
     const image = currentTrack.album.images?.[0];
+
 
     return (
         <BottomModal
             visible={playerFullScreen}
             onDismiss={() => setPlayerFullScreen(false)}
-            swipeDirection={["up", "down"]}
+            swipeDirection={["down"]}
+            onSwiping={() => setPlayerFullScreen(false)}
             swipeThreshold={200}
+
         >
             <ModalContent
                 style={{ height: "100%", width: "100%", backgroundColor: "black" }}
@@ -49,21 +58,28 @@ const FullPlayer = ({ playerFullScreen, setPlayerFullScreen, isPlaying, setIsPla
                         }}
                     >
                         <Pressable
-                            onPress={() => { setPlayerFullScreen(!playerFullScreen) }}
+                            onPress={() => { setPlayerFullScreen(false) }}
                             style={({ pressed }) => ({
+
                                 opacity: pressed ? 0.5 : 1, // Adjust the opacity when pressed
                             })}
                         >
 
                             <AntDesign
 
-                                name="down"
+                                name="plus"
                                 size={24}
                                 color="white"
                             />
                         </Pressable>
 
-
+                        <View
+                            style={{
+                                backgroundColor: "red",
+                                width: 50, height: 2,
+                                marginVertical: 20
+                            }}
+                        />
                         <Entypo name="dots-three-vertical" size={24} color="white" />
 
                     </View>
@@ -152,34 +168,27 @@ const FullPlayer = ({ playerFullScreen, setPlayerFullScreen, isPlaying, setIsPla
                                 style={({ pressed }) => ({
                                     opacity: pressed ? 0.5 : 1, // Adjust the opacity when pressed
 
-                                    width: 62,
-                                    height: 62,
+                                    width: 60,
+                                    height: 60,
                                     borderRadius: 40,
                                     backgroundColor: "red",
                                     justifyContent: "center",
                                     alignItems: "center",
                                 })}
-                                onPress={() => setIsPlaying(!isPlaying)}
+                                onPress={() => console.log("playe/pause")}
+
                             >
-                                {isPlaying ? (
-                                    <AntDesign name="pausecircle" size={60} color="black" />
+                                <Ionicons
 
-                                ) : (
-
-                                    <Entypo name="controller-play" size={26} color="black" />
-
-
-                                )}
+                                    disabled={!currentTrack?.preview_url}
+                                    name={isPlaying ? 'pause' : 'play'}
+                                    size={22}
+                                    color={currentTrack?.preview_url ? 'black' : 'gray'}
+                                />
                             </Pressable>
                             <AntDesign name="stepforward" color="white" size={32} />
                             <Icon name="repeat" color="rgba(255, 255, 255, 0.5)" size={24} />
                         </View>
-                        {/* <Header heading={"Musicas semelhantes"} link={"/albums"} linkText={"Mais"} showLink={false} />
-                            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                                {tracks.map((item, index) => (
-                                    <ArtistCard track={item} key={index} />
-                                ))}
-                            </ScrollView> */}
                     </View>
                 </View>
 

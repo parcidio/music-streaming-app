@@ -62,9 +62,9 @@ const Player = () => {
     }
 
     if (isPlaying) {
-      sound.pauseAsync();
+      await sound.pauseAsync();
     } else {
-      sound.playAsync()
+      await sound.playAsync()
     }
     setIsPlaying(!isPlaying);
 
@@ -107,38 +107,12 @@ const Player = () => {
           />
         </View>
       </View>
-      {/* <Modal
-        visible={playerFullScreen}
-        onTouchOutside={() => {
-          setPlayerFullScreen(false)
-        }}
-        modalAnimation={new SlideAnimation({
-          slideFrom: 'bottom',
-        })}
-        footer={
-          <ModalFooter>
-            <ModalButton
-              text="CANCEL"
-              onPress={() => { }}
-            />
-            <ModalButton
-              text="OK"
-              onPress={() => { }}
-            />
-          </ModalFooter>
-        }
-      >
-        <ModalContent>
-          {image && <Image source={{ uri: image.url }} style={styles.image} />}
-        </ModalContent>
-      </Modal> */}
+
 
 
       {playerFullScreen && (
-        <FullPlayer playerFullScreen={playerFullScreen} setPlayerFullScreen={setPlayerFullScreen} isPlaying={isPlaying} setIsPlaying={setIsPlaying} currentTrack={currentTrack} />
-      )
-
-      }
+        <FullPlayer onPause={onPause} playerFullScreen={playerFullScreen} setPlayerFullScreen={setPlayerFullScreen} isPlaying={isPlaying} setIsPlaying={setIsPlaying} currentTrack={currentTrack} />
+      )}
     </>
   );
 };
