@@ -9,6 +9,7 @@ import { ModalPortal } from 'react-native-modals';
 import { useColorScheme } from '../components/useColorScheme';
 import PlayerProvider from '../providers/PlayerProvider';
 import { CustomThemeProvider } from '../providers/CustomThemeContext';
+
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -51,7 +52,6 @@ function RootLayoutNav() {
 
   return (
     // controls the theme
-
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <CustomThemeProvider>
         {/* controls the current song playing */}
