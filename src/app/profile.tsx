@@ -15,7 +15,7 @@ import { Ionicons } from "@expo/vector-icons/";
 import { tracks } from '@/assets/data/tracks';
 import { useTheme } from '../providers/CustomThemeContext';
 import { SearchBox } from '../components/searchBox';
-import { darkColors, lightColors } from '../theme';
+import { darkColors, lightColors, palette } from '../theme';
 const SECTIONS = [
   {
     header: 'Definições',
@@ -24,13 +24,14 @@ const SECTIONS = [
       { label: 'Local', value: 'Angola', type: 'input' },
       { label: 'Tema Escuro', value: false, type: 'boolean' },
       { label: 'Use Wi-Fi', value: true, type: 'boolean' },
+      { label: 'Receber notificações', value: false, type: 'boolean' },
     ],
   },
   {
     header: 'Suporte',
     items: [
-      // { label: 'Envie um email', type: 'link' },
       { label: 'Mensagens', type: 'link', notification: ['welcome'] },
+      { label: 'Termos de uso', type: 'link' },
     ],
   },
 ];
@@ -66,7 +67,8 @@ export default function ProfileScreen() {
           </View>
         </View>
 
-        <Pressable
+        <TouchableOpacity
+          activeOpacity={0.8}
           onPress={() => {
             // handle onPress
           }}>
@@ -74,7 +76,19 @@ export default function ProfileScreen() {
             <Text style={{ ...styles.profileActionText, color: isDarkMode ? darkColors.buttonText : lightColors.buttonText }}>Edit Profile</Text>
             <Ionicons color={isDarkMode ? darkColors.buttonIcon : lightColors.buttonIcon} name="pencil" size={16} />
           </View>
-        </Pressable>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          activeOpacity={0.8}
+
+          onPress={() => {
+            // handle onPress
+          }}>
+          <View style={{ ...styles.profileAction, backgroundColor: isDarkMode ? darkColors.button : lightColors.button }}>
+            <Text style={{ ...styles.profileActionText, color: palette.primary }}>Log out</Text>
+            <Ionicons color={palette.primary} name="exit" size={16} />
+          </View>
+        </TouchableOpacity>
       </View>
 
       <ScrollView>
@@ -134,11 +148,11 @@ export default function ProfileScreen() {
                   )}
 
                   {type === 'boolean' && (
-                    <Switch trackColor={{ true: 'red', }} thumbColor="red" value={label == 'Tema Escuro' && isDarkMode} onChange={label == 'Tema Escuro' ? toggleTheme : () => { }} />
+                    <Switch trackColor={{ true: palette.primary, false: isDarkMode ? darkColors.switch : lightColors.switch }} thumbColor={"red"} value={label == 'Tema Escuro' && isDarkMode} onChange={label == 'Tema Escuro' ? toggleTheme : () => { }} />
                   )}
-                  {(type === 'link' || notification?.length > 0) && (
+                  {(notification?.length > 0) && (
                     <View style={{ backgroundColor: "red", padding: 3, borderRadius: 10, alignContent: "center", }}>
-                      <Text style={{ color: "white", marginHorizontal: 4 }}>{notification.length}</Text>
+                      <Text style={{ color: "white", marginHorizontal: 4 }}>{notification?.length}</Text>
                     </View>)}
                   {(type === 'input' || type === 'link') && (
                     <Ionicons
@@ -151,6 +165,7 @@ export default function ProfileScreen() {
             </View>
           ))}
         </View>
+        <Text style={styles.contentFooter}>App Version 1.0</Text>
       </ScrollView>
     </SafeAreaView >
   );
@@ -269,5 +284,14 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#7f7f7f',
     marginRight: 4,
+  },
+  // Content
+  contentFooter: {
+
+    marginTop: 24,
+    fontSize: 13,
+    fontWeight: '500',
+    textAlign: 'center',
+    color: '#a69f9f',
   },
 });
