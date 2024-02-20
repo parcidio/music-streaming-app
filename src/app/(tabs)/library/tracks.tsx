@@ -103,7 +103,8 @@ export default function LibraryTracksScreen() {
                                     <Text
                                         style={[
                                             styles.tabText,
-                                            isActive && { color: isDarkMode ? darkColors.text : lightColors.text },
+                                            isDarkMode ? { color: darkColors.tabText } : { color: lightColors.tabText },
+                                            isActive && { color: lightColors.tabText },
                                         ]}>
                                         {name}
                                     </Text>
@@ -249,7 +250,7 @@ const styles = StyleSheet.create({
     tabText: {
         fontSize: 13,
         fontWeight: '600',
-        color: '#6b7280',
+        // color: '#6b7280',
         marginLeft: 5,
     },
     /** Row */

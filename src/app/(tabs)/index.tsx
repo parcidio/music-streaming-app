@@ -59,7 +59,13 @@ const HomeScreen = () => {
         <Header heading={"Generos"} link={"/menus"} linkText={"Mais"} showLink={true} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {genre.map((item) => (
-            <GenreCard title={item.title} />
+            <Link href="/" asChild>
+              <Pressable>
+                {({ pressed }) => (
+                  <GenreCard title={item.title} />
+                )}
+              </Pressable>
+            </Link>
           ))}
         </ScrollView>
         {/* Os Top Artistas */}

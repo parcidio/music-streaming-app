@@ -29,8 +29,8 @@ const SECTIONS = [
   {
     header: 'Suporte',
     items: [
-      { label: 'Envie um email', type: 'link' },
-      { label: 'Mensagens', type: 'link' },
+      // { label: 'Envie um email', type: 'link' },
+      { label: 'Mensagens', type: 'link', notification: ['welcome'] },
     ],
   },
 ];
@@ -112,7 +112,7 @@ export default function ProfileScreen() {
             })}
           </View>
 
-          {items.map(({ label, type, value }: any, index) => (
+          {items.map(({ label, type, value, notification }: any, index) => (
             <View
               key={label}
               style={[
@@ -136,7 +136,10 @@ export default function ProfileScreen() {
                   {type === 'boolean' && (
                     <Switch trackColor={{ true: 'red', }} thumbColor="red" value={label == 'Tema Escuro' && isDarkMode} onChange={label == 'Tema Escuro' ? toggleTheme : () => { }} />
                   )}
-
+                  {(type === 'link' || notification?.length > 0) && (
+                    <View style={{ backgroundColor: "red", padding: 3, borderRadius: 10, alignContent: "center", }}>
+                      <Text style={{ color: "white", marginHorizontal: 4 }}>{notification.length}</Text>
+                    </View>)}
                   {(type === 'input' || type === 'link') && (
                     <Ionicons
                       color="red"

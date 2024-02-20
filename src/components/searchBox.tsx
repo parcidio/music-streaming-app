@@ -44,7 +44,7 @@ export function SearchBox({ search, setSearch, title = "", showProfile = false, 
                         <Icon name="search" color={isDarkMode ? darkColors.icon : lightColors.icon} />
                         <TextInput
                             value={search}
-                            placeholder="Search..."
+                            placeholder="Pesquisa..."
                             placeholderTextColor="gray"
                             onChangeText={setSearch}
                             style={{ ...styles.input, color: isDarkMode ? darkColors.text : lightColors.text }} />

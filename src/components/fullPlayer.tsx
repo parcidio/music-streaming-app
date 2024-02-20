@@ -14,6 +14,7 @@ import { Track } from '@/assets/types';
 import { State } from 'expo-router/build/fork/getPathFromState';
 import { Callback } from '@react-native-async-storage/async-storage/lib/typescript/types';
 import { Feather as Icon } from "@expo/vector-icons";
+import { darkColors, palette } from '../theme';
 
 interface FullPlayerProps {
     playerFullScreen: boolean,
@@ -67,7 +68,7 @@ const FullPlayer = ({ playerFullScreen, setPlayerFullScreen, isPlaying, onPause,
 
                             <AntDesign
 
-                                name="plus"
+                                name="menu-unfold"
                                 size={24}
                                 color="white"
                             />
@@ -75,8 +76,9 @@ const FullPlayer = ({ playerFullScreen, setPlayerFullScreen, isPlaying, onPause,
 
                         <View
                             style={{
-                                backgroundColor: "red",
-                                width: 50, height: 2,
+                                backgroundColor: palette.primary,
+                                width: 50, height: 4,
+                                borderRadius: 50,
                                 marginVertical: 20
                             }}
                         />

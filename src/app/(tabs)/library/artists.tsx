@@ -91,12 +91,13 @@ export default function LibraryArtistsScreen() {
                                 onPress={() => {
                                     setValue(index);
                                 }}>
-                                <View style={!isActive ? { ...styles.tab } : { ...styles.tab, backgroundColor: 'red' }}>
+                                <View style={!isActive ? { ...styles.tab, backgroundColor: isDarkMode ? darkColors.tab : lightColors.tab } : { ...styles.tab, backgroundColor: 'red' }}>
 
                                     <Text
                                         style={[
                                             styles.tabText,
-                                            isActive && { color: 'white' },
+                                            isDarkMode ? { color: darkColors.tabText } : { color: lightColors.tabText },
+                                            isActive && { color: lightColors.tabText },
                                         ]}>
                                         {name}
                                     </Text>
