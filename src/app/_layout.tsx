@@ -57,7 +57,7 @@ function RootLayoutNav() {
         {/* controls the current song playing */}
         <PlayerProvider>
           <Stack>
-            <Stack.Screen name="welcomeScreen" options={{ headerShown: false }} />
+            <Stack.Screen name="splash" options={{ headerShown: false }} />
             <Stack.Screen name="signup" options={{ headerShown: false }} />
             <Stack.Screen name="login" options={{ headerShown: false }} />
             <Stack.Screen name="otp" options={{ headerShown: false }} />

@@ -52,14 +52,14 @@ const HomeScreen = () => {
 
       <ScrollView>
         {/* Trending */}
-        <Header heading={"Trending"} link={"/hits"} linkText={"Mais"} showLink={true} />
+        <Header heading={"Tendências"} link={"/hits"} linkText={"Mais"} showLink={true} />
 
         <HomeBanner items={bannerData} pagination={true} autoPlay={false} />
         {/* Generos */}
         <Header heading={"Generos"} link={"/menus"} linkText={"Mais"} showLink={true} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {genre.map((item) => (
-            <Link href="/login" asChild>
+            <Link href="/splash" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <GenreCard title={item.title} />

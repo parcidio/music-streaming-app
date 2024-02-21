@@ -10,13 +10,18 @@ import {
 import { darkColors, lightColors, palette } from '../theme';
 import { useTheme } from '../providers/CustomThemeContext';
 import { SearchBox } from '../components/searchBox';
+import { useLinkTo, useNavigation } from '@react-navigation/native';
+
 
 export default function OTPVerification() {
     const [otp, setOtp] = useState('');
     const { isDarkMode } = useTheme();
+    const linkTo = useLinkTo();
 
     const handleVerify = () => {
         // Handle OTP verification logic
+        linkTo("/(tabs)")
+
     };
 
 
@@ -53,6 +58,16 @@ export default function OTPVerification() {
                             </View>
                         </TouchableOpacity>
                     </View>
+                    <TouchableOpacity
+                        onPress={() => {
+                            // handle otp resent
+
+                        }}
+                        style={{ marginTop: 30 }}>
+                        <Text style={{ ...styles.formFooter, color: isDarkMode ? darkColors.mutedText : lightColors.text }}>
+                            Ainda não recebeu um otp? <Text style={{ color: palette.primary }}>Reenvia um o otp</Text>
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </SafeAreaView>
@@ -105,5 +120,11 @@ const styles = StyleSheet.create({
         lineHeight: 26,
         fontWeight: '600',
         fontSize: 15,
+    },
+    formFooter: {
+        fontSize: 14,
+        fontWeight: '600',
+        color: '#51505a',
+        textAlign: 'center',
     },
 });

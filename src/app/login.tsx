@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { useTheme } from '../providers/CustomThemeContext';
 import { darkColors, lightColors, palette } from '../theme';
-import { useNavigation } from '@react-navigation/native';
+import { useLinkTo, useNavigation } from '@react-navigation/native';
 
 const INPUT_OFFSET = 60;
 
@@ -12,10 +12,14 @@ const LoginWithPhone = () => {
         password: '',
     });
     const { isDarkMode } = useTheme();
-    const navigation = useNavigation();
+    const linkTo = useLinkTo();
+
+
 
     const handleLoginPress = () => {
         // Add your logic for handling login here
+        linkTo("/(tabs)")
+
     };
 
     return (
@@ -61,6 +65,7 @@ const LoginWithPhone = () => {
                     <TouchableOpacity
                         onPress={() => {
                             // handle link
+                            linkTo("/signup")
                         }}
                         style={{ marginTop: 30 }}>
                         <Text style={{ ...styles.formFooter, color: isDarkMode ? darkColors.mutedText : lightColors.text }}>

@@ -12,7 +12,7 @@ import {
 import { darkColors, lightColors, palette } from '../theme';
 import { useTheme } from '../providers/CustomThemeContext';
 import { SearchBox } from '../components/searchBox';
-import { useNavigation } from '@react-navigation/native';
+import { useLinkTo, useNavigation } from '@react-navigation/native';
 
 const INPUT_OFFSET = 60;
 
@@ -23,6 +23,9 @@ export default function SignUp() {
     });
     const { isDarkMode } = useTheme();
     const navigation = useNavigation();
+
+    const linkTo = useLinkTo();
+
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: isDarkMode ? darkColors.background : lightColors.background }}>
@@ -107,6 +110,8 @@ export default function SignUp() {
                                 activeOpacity={.5}
                                 onPress={() => {
                                     // handle onPress
+                                    linkTo("/otp")
+
                                 }}>
                                 <View style={{ ...styles.btn, backgroundColor: palette.primary }}>
 
@@ -121,6 +126,8 @@ export default function SignUp() {
                         <TouchableOpacity
                             onPress={() => {
                                 // handle link
+                                linkTo("/signup")
+
                             }}
                             style={{ marginTop: 30 }}>
                             <Text style={{ ...styles.formFooter, color: isDarkMode ? darkColors.mutedText : lightColors.text }}>

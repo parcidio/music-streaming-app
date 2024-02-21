@@ -15,7 +15,7 @@ const SECTIONS = [
         ],
     },
     {
-        header: 'Favourites',
+        header: 'Favoritos',
         items: [
             {
                 id: '6eT7xZZlB2mwyzJ2sUKG6w',
@@ -53,7 +53,7 @@ const SECTIONS = [
         ],
     },
     {
-        header: 'Recents',
+        header: 'Recentes',
         items: [
             ...tracks
         ],

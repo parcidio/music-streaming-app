@@ -23,7 +23,7 @@ export const menus: Menu[] = [
     },
     {
         link: "/dj",
-        text: "👋 Dj Sessions",
+        text: "👋 Sessões de DJ",
         color: "#128d72",
     },
 
