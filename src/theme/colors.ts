@@ -2,7 +2,7 @@ export const palette = {
   light: "#FFFFFF",
   dark: "#000000",
   primary: "red",
-  secondary: "gray",
+  secondary: "#EBEBE4",
   transparent: "rgba(0,0,0,0)",
  
   darkAccent: "rgba(255,255,255,0.15)",
@@ -44,7 +44,7 @@ export const palette = {
   warning800: "#938405",
   warning900: "#7A6C03",
 
- 
+  grey: "F3EFF6",
 
   redalternative: "#DA324B"
 };
@@ -68,7 +68,8 @@ export const darkColors = {
   switch: palette.darkAccent,
   card: palette.darkAccent,
   border: palette.darkAccent,
-  bottomBar:  palette.dark
+  bottomBar:  palette.dark,
+  input: palette.darkAccent
  
 
 };
@@ -92,8 +93,9 @@ export const lightColors = {
   switch: palette.lightAccent,
   card: palette.lightAccent,
   border: palette.lightAccent,
-  bottomBar:  palette.light
-
+  bottomBar:  palette.light,
+  input: palette.lightAccent,
+  
 
 
 
