@@ -59,7 +59,7 @@ const HomeScreen = () => {
         <Header heading={"Generos"} link={"/menus"} linkText={"Mais"} showLink={true} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {genre.map((item) => (
-            <Link href="/signup" asChild>
+            <Link href="/otp" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <GenreCard title={item.title} />

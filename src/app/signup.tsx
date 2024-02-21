@@ -12,6 +12,7 @@ import {
 import { darkColors, lightColors, palette } from '../theme';
 import { useTheme } from '../providers/CustomThemeContext';
 import { SearchBox } from '../components/searchBox';
+import { useNavigation } from '@react-navigation/native';
 
 const INPUT_OFFSET = 60;
 
@@ -21,6 +22,7 @@ export default function SignUp() {
         password: '',
     });
     const { isDarkMode } = useTheme();
+    const navigation = useNavigation();
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: isDarkMode ? darkColors.background : lightColors.background }}>
@@ -30,7 +32,7 @@ export default function SignUp() {
                 <View style={styles.header}>
                     <Text style={{ ...styles.title, color: isDarkMode ? darkColors.text : lightColors.text }}>Inscreva-se</Text>
 
-                    <Text style={{ ...styles.subtitle, color: isDarkMode ? darkColors.mutedText : lightColors.mutedText }}>
+                    <Text style={{ ...styles.subtitle, color: isDarkMode ? darkColors.mutedText : lightColors.text }}>
                         Digite seu numbero telefone e depois você receberá um código de 4 dígitos para verificar sua conta
                     </Text>
                 </View>
@@ -121,7 +123,7 @@ export default function SignUp() {
                                 // handle link
                             }}
                             style={{ marginTop: 30 }}>
-                            <Text style={{ ...styles.formFooter, color: isDarkMode ? darkColors.mutedText : lightColors.mutedText }}>
+                            <Text style={{ ...styles.formFooter, color: isDarkMode ? darkColors.mutedText : lightColors.text }}>
                                 Já és um membro?<Text style={{ color: palette.primary }}> faça o login</Text>
                             </Text>
                         </TouchableOpacity>
