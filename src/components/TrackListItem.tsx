@@ -18,9 +18,9 @@ export default function TrackListItem({ track }: TrackListItemProps) {
     >
       {image && <Image source={{ uri: image.url }} style={styles.image} />}
       <View style={styles.containerActive}>
-        <Text style={{ ...styles.title, color: isDarkMode ? darkColors.text : lightColors.text }}
+        <Text style={{ ...styles.title, color: isDarkMode ? darkColors.text : lightColors.mutedText }}
           numberOfLines={1} ellipsizeMode="tail">{track.name}</Text>
-        <Text style={{ ...styles.subtitle, color: isDarkMode ? darkColors.mutedText : lightColors.mutedText }}>{track.artists[0]?.name}</Text>
+        <Text style={{ ...styles.subtitle, color: isDarkMode ? darkColors.mutedText : lightColors.text }}>{track.artists[0]?.name}</Text>
       </View>
     </Pressable>
   );

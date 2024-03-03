@@ -63,7 +63,7 @@ export default function ProfileScreen() {
 
           <View>
             <Text style={{ ...styles.profileName, color: isDarkMode ? darkColors.text : lightColors.text }}>Parcidio Andre</Text>
-            <Text style={styles.profileHandle}>parcidioandre@gmail.com</Text>
+            <Text style={styles.profileHandle}>exemplo@gmail.com</Text>
           </View>
         </View>
 

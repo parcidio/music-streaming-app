@@ -78,7 +78,7 @@ export const lightColors = {
   palette,
   transparent: palette.transparent,
   text: palette.dark,
-  mutedText: palette.secondary,
+  mutedText: palette.grey,
   activeText: palette.primary,
   background: palette.light,
   button: palette.dark,

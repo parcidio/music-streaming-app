@@ -30,13 +30,13 @@ export default function SignUp() {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: isDarkMode ? darkColors.background : lightColors.background }}>
             <View style={styles.container}>
-                <SearchBox showBackButton={true} showProfile={false} showSearchBox={false} />
+                {/* <SearchBox showBackButton={true} showProfile={false} showSearchBox={false} /> */}
 
                 <View style={styles.header}>
                     <Text style={{ ...styles.title, color: isDarkMode ? darkColors.text : lightColors.text }}>Inscreva-se</Text>
 
                     <Text style={{ ...styles.subtitle, color: isDarkMode ? darkColors.mutedText : lightColors.text }}>
-                        Digite seu numbero telefone e depois você receberá um código de 4 dígitos para verificar sua conta
+                        Digite seu número de telefone e depois você receberá um código de 4 dígitos para verificar sua conta
                     </Text>
                 </View>
 
@@ -74,7 +74,7 @@ export default function SignUp() {
 
                                 keyboardType="phone-pad"
                                 onChangeText={phone => setForm({ ...form, phone })}
-                                placeholder="Phone number"
+                                placeholder="Número de telefone"
                                 placeholderTextColor={isDarkMode ? darkColors.text : lightColors.text}
                                 returnKeyType="done"
 
@@ -126,7 +126,7 @@ export default function SignUp() {
                         <TouchableOpacity
                             onPress={() => {
                                 // handle link
-                                linkTo("/signup")
+                                linkTo("/login")
 
                             }}
                             style={{ marginTop: 30 }}>
