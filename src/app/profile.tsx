@@ -101,6 +101,7 @@ export default function ProfileScreen() {
           <View style={styles.tabs}>
             {tabs.map(({ name }: any, index) => {
               const isActive = index === value;
+
               return (
                 <View
                   key={name}
