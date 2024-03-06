@@ -16,6 +16,7 @@ import { tracks } from '@/assets/data/tracks';
 import { useTheme } from '../providers/CustomThemeContext';
 import { SearchBox } from '../components/searchBox';
 import { darkColors, lightColors, palette } from '../theme';
+import { Link } from 'expo-router';
 const SECTIONS = [
   {
     header: 'Definições',
@@ -77,18 +78,22 @@ export default function ProfileScreen() {
             <Ionicons color={isDarkMode ? darkColors.buttonIcon : lightColors.buttonIcon} name="pencil" size={16} />
           </View>
         </TouchableOpacity>
+        <Link href="/login" asChild>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => {
+              // handle onPress
+            }}>
+            <View style={{ ...styles.profileAction, backgroundColor: isDarkMode ? darkColors.button : lightColors.button }}>
 
-        <TouchableOpacity
-          activeOpacity={0.8}
+              <Text style={{ ...styles.profileActionText, color: palette.primary }}>Log out</Text>
 
-          onPress={() => {
-            // handle onPress
-          }}>
-          <View style={{ ...styles.profileAction, backgroundColor: isDarkMode ? darkColors.button : lightColors.button }}>
-            <Text style={{ ...styles.profileActionText, color: palette.primary }}>Log out</Text>
-            <Ionicons color={palette.primary} name="exit" size={16} />
-          </View>
-        </TouchableOpacity>
+
+              <Ionicons color={palette.primary} name="exit" size={16} />
+            </View>
+          </TouchableOpacity>
+        </Link>
+
       </View>
 
       <ScrollView>
@@ -96,7 +101,6 @@ export default function ProfileScreen() {
           <View style={styles.tabs}>
             {tabs.map(({ name }: any, index) => {
               const isActive = index === value;
-
               return (
                 <View
                   key={name}
