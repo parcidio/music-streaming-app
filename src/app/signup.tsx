@@ -13,8 +13,11 @@ import { darkColors, lightColors, palette } from '../theme';
 import { useTheme } from '../providers/CustomThemeContext';
 import { SearchBox } from '../components/searchBox';
 import { useLinkTo, useNavigation } from '@react-navigation/native';
+import Modal from 'react-native-modal'; // Import the Modal component
+import CountryPicker from '../components/CountryPicker';
+import { countries } from '@/assets/data/countries';
 
-const INPUT_OFFSET = 60;
+const INPUT_OFFSET = 80;
 
 export default function SignUp() {
     const [form, setForm] = useState({
@@ -27,6 +30,13 @@ export default function SignUp() {
     const linkTo = useLinkTo();
 
 
+    const [isModalVisible, setModalVisible] = useState(false);
+
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+    };
+
+    const [selectedCountry, setSelectedCountry] = useState('AO')
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: isDarkMode ? darkColors.background : lightColors.background }}>
             <View style={styles.container}>
@@ -68,7 +78,8 @@ export default function SignUp() {
                                 value={form.phone} />
                         </View>
                         <View style={styles.input}>
-                            <Text style={{ ...styles.inputLabel, color: isDarkMode ? darkColors.text : lightColors.text }}>+244</Text>
+                            <Text style={{ ...styles.inputLabel, color: isDarkMode ? darkColors.text : lightColors.text }} onPress={() => setModalVisible(!isModalVisible)}>{(countries.filter((e) => e.iso == selectedCountry))[0].code.toString()}</Text>
+                            <Modal backdropOpacity={.5} backdropColor="black" isVisible={isModalVisible} onBackdropPress={toggleModal} children={<CountryPicker countries={countries} selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry} onClose={toggleModal} />} />
 
                             <TextInput
 

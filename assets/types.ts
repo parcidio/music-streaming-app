@@ -5,6 +5,7 @@ export type Track = {
   name: string;
   preview_url?: string | null;
   album: Album;
+  samples: number[];
   artists: Artist[];
 };
 export type Album = {

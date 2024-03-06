@@ -16,6 +16,8 @@ import FullPlayer from './fullPlayer'
 const Player = () => {
   const { currentTrack } = usePlayerContext();
 
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+
   if (!currentTrack) {
     return null;
   }
@@ -70,6 +72,18 @@ const Player = () => {
 
   }
 
+  const playNextTrack = () => {
+    const nextIndex = (currentTrackIndex + 1) % tracks.length;
+    setCurrentTrackIndex(nextIndex);
+  };
+
+  const playPrevTrack = () => {
+    const prevIndex =
+      (currentTrackIndex - 1 + tracks.length) % tracks.length;
+    setCurrentTrackIndex(prevIndex);
+  };
+
+
   const [playerFullScreen, setPlayerFullScreen] = useState(false)
 
   return (
@@ -90,6 +104,7 @@ const Player = () => {
             <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{currentTrack.name}</Text>
             <Text style={styles.subtitle} numberOfLines={1} ellipsizeMode="tail">{currentTrack.artists[0]?.name}</Text>
             <View style={styles.progressBar} />
+
           </View>
 
           <Ionicons

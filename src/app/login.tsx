@@ -3,8 +3,11 @@ import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, TextInput } fro
 import { useTheme } from '../providers/CustomThemeContext';
 import { darkColors, lightColors, palette } from '../theme';
 import { useLinkTo, useNavigation } from '@react-navigation/native';
+import Modal from 'react-native-modal'; // Import the Modal component
+import CountryPicker from '../components/CountryPicker';
+import { countries } from '@/assets/data/countries';
 
-const INPUT_OFFSET = 60;
+const INPUT_OFFSET = 80;
 
 const LoginWithPhone = () => {
     const [form, setForm] = useState({
@@ -22,8 +25,17 @@ const LoginWithPhone = () => {
 
     };
 
+
+    const [isModalVisible, setModalVisible] = useState(false);
+
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+    };
+
+    const [selectedCountry, setSelectedCountry] = useState('AO')
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: isDarkMode ? darkColors.background : lightColors.background }}>
+
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={{ ...styles.title, color: isDarkMode ? darkColors.text : lightColors.text }}>Faça o Login</Text>
@@ -31,7 +43,9 @@ const LoginWithPhone = () => {
 
                 <View style={styles.form}>
                     <View style={styles.input}>
-                        <Text style={{ ...styles.inputLabel, color: isDarkMode ? darkColors.text : lightColors.text }}>+244</Text>
+                        <Text style={{ ...styles.inputLabel, color: isDarkMode ? darkColors.text : lightColors.text }} onPress={() => setModalVisible(!isModalVisible)}>{(countries.filter((e) => e.iso == selectedCountry))[0].code.toString()}</Text>
+                        <Modal backdropOpacity={.5} backdropColor="black" isVisible={isModalVisible} onBackdropPress={toggleModal} children={<CountryPicker countries={countries} selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry} onClose={toggleModal} />} />
+
                         <TextInput
                             keyboardType="phone-pad"
                             onChangeText={(phone) => setForm({ ...form, phone })}
