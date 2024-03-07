@@ -9,6 +9,7 @@ import { ModalPortal } from 'react-native-modals';
 import { useColorScheme } from '../components/useColorScheme';
 import PlayerProvider from '../providers/PlayerProvider';
 import { CustomThemeProvider } from '../providers/CustomThemeContext';
+import { CustomLocalProvider } from '../providers/CustomLocalizationContext';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -54,25 +55,28 @@ function RootLayoutNav() {
     // controls the theme
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <CustomThemeProvider>
-        {/* controls the current song playing */}
-        <PlayerProvider>
-          <Stack initialRouteName='index'>
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-            <Stack.Screen name="signup" options={{ headerShown: false }} />
-            <Stack.Screen name="login" options={{ headerShown: false }} />
-            <Stack.Screen name="otp" options={{ headerShown: false }} />
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="profile" options={{ presentation: 'modal', headerShown: false }} />
-            <Stack.Screen name="hits" options={{ presentation: 'modal', headerShown: false }} />
-            <Stack.Screen name="newArtists" options={{ presentation: 'modal', headerShown: false }} />
-            <Stack.Screen name="artists" options={{ presentation: 'modal', headerShown: false }} />
-            <Stack.Screen name="albums" options={{ presentation: 'modal', headerShown: false }} />
-            <Stack.Screen name="surpriseMe" options={{ presentation: 'modal', headerShown: false }} />
-            <Stack.Screen name="newReleases" options={{ presentation: 'modal', headerShown: false }} />
-            <Stack.Screen name="dj" options={{ presentation: 'modal', headerShown: false }} />
-          </Stack>
-          <ModalPortal />
-        </PlayerProvider>
+        <CustomLocalProvider>
+          {/* controls the current song playing */}
+          <PlayerProvider>
+            <Stack initialRouteName='index'>
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack.Screen name="signup" options={{ headerShown: false }} />
+              <Stack.Screen name="login" options={{ headerShown: false }} />
+              <Stack.Screen name="otp" options={{ headerShown: false }} />
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="profile" options={{ presentation: 'modal', headerShown: false }} />
+              <Stack.Screen name="hits" options={{ presentation: 'modal', headerShown: false }} />
+              <Stack.Screen name="newArtists" options={{ presentation: 'modal', headerShown: false }} />
+              <Stack.Screen name="artists" options={{ presentation: 'modal', headerShown: false }} />
+              <Stack.Screen name="albums" options={{ presentation: 'modal', headerShown: false }} />
+              <Stack.Screen name="surpriseMe" options={{ presentation: 'modal', headerShown: false }} />
+              <Stack.Screen name="newReleases" options={{ presentation: 'modal', headerShown: false }} />
+              <Stack.Screen name="dj" options={{ presentation: 'modal', headerShown: false }} />
+            </Stack>
+            <ModalPortal />
+          </PlayerProvider>
+        </CustomLocalProvider>
+
       </CustomThemeProvider>
     </ThemeProvider>
   );

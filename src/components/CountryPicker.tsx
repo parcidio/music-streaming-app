@@ -12,7 +12,6 @@ import { FontAwesome } from '@expo/vector-icons';
 
 
 export default function CountryPicker({ onClose, countries, setSelectedCountry, selectedCountry }: any) {
-    const [value, setValue] = useState(0);
 
     return (
         <View style={{

@@ -14,31 +14,40 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from "@expo/vector-icons/";
 import { tracks } from '@/assets/data/tracks';
 import { useTheme } from '../providers/CustomThemeContext';
+import { useLocal } from '../providers/CustomLocalizationContext';
 import { SearchBox } from '../components/searchBox';
 import { darkColors, lightColors, palette } from '../theme';
 import { Link } from 'expo-router';
-const SECTIONS = [
-  {
-    header: 'Definições',
-    items: [
-      { label: 'Lingua', value: 'Português', type: 'input' },
-      { label: 'Local', value: 'Angola', type: 'input' },
-      { label: 'Tema Escuro', value: false, type: 'boolean' },
-      { label: 'Use Wi-Fi', value: true, type: 'boolean' },
-      { label: 'Receber notificações', value: false, type: 'boolean' },
-    ],
-  },
-  {
-    header: 'Suporte',
-    items: [
-      { label: 'Mensagens', type: 'link', notification: ['welcome'] },
-      { label: 'Termos de uso', type: 'link' },
-    ],
-  },
-];
+import Modal from 'react-native-modal'; // Import the Modal component
+import { countries } from '@/assets/data/countries';
+import CountryPicker from '../components/CountryPicker';
+
 
 export default function ProfileScreen() {
   const [value, setValue] = useState(0);
+  const { language,
+    local,
+    setLanguage,
+    setLocal, } = useLocal();
+  const SECTIONS = [
+    {
+      header: 'Definições',
+      items: [
+        { label: 'Lingua', value: language, type: 'input' },
+        { label: 'Local', value: (countries.filter((e) => e.iso == local))[0].name.toString(), type: 'input' },
+        { label: 'Tema Escuro', value: false, type: 'boolean' },
+        { label: 'Use Wi-Fi', value: true, type: 'boolean' },
+        { label: 'Receber notificações', value: false, type: 'boolean' },
+      ],
+    },
+    {
+      header: 'Suporte',
+      items: [
+        { label: 'Mensagens', type: 'link', notification: ['welcome'] },
+        { label: 'Termos de uso', type: 'link' },
+      ],
+    },
+  ];
   const { tabs, items } = useMemo(() => {
     return {
       tabs: SECTIONS.map(({ header }) => ({
@@ -50,9 +59,19 @@ export default function ProfileScreen() {
 
   const { isDarkMode, toggleTheme } = useTheme();
 
+
+  const [isCountryVisible, setIsCountryVisible] = useState(false);
+
+  const toggleModal = () => {
+    setIsCountryVisible(!isCountryVisible);
+  };
+
+
   return (
     <SafeAreaView style={{ ...styles.container, backgroundColor: isDarkMode ? darkColors.background : lightColors.background }}>
       <SearchBox title={"Perfil"} showSearchBox={false} showProfile={false} showBackButton={true} />
+      <Modal backdropOpacity={.5} backdropColor="black" isVisible={isCountryVisible} onBackdropPress={toggleModal} children={<CountryPicker countries={countries} selectedCountry={local} setSelectedCountry={setLocal} onClose={toggleModal} />} />
+
       <View style={styles.profile}>
         <View style={styles.profileHeader}>
           <Image
@@ -142,6 +161,9 @@ export default function ProfileScreen() {
               <Pressable
                 onPress={() => {
                   // handle onPress
+                  if (label == 'Local') {
+                    setIsCountryVisible(true)
+                  }
                 }}>
                 <View style={styles.row}>
                   <Text style={{ ...styles.rowLabel, color: isDarkMode ? 'white' : darkColors.background }}>{label}</Text>
