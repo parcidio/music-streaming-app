@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   StyleSheet,
 
@@ -29,12 +29,14 @@ export default function ProfileScreen() {
     local,
     setLanguage,
     setLocal, } = useLocal();
+
+
   const SECTIONS = [
     {
       header: 'Definições',
       items: [
         { label: 'Lingua', value: language, type: 'input' },
-        { label: 'Local', value: (countries.filter((e) => e.iso == local))[0].name.toString(), type: 'input' },
+        { label: 'Local', value: (countries.filter((e) => e.iso == local))[0]?.name.toString(), type: 'input' },
         { label: 'Tema Escuro', value: false, type: 'boolean' },
         { label: 'Use Wi-Fi', value: true, type: 'boolean' },
         { label: 'Receber notificações', value: false, type: 'boolean' },
@@ -48,6 +50,7 @@ export default function ProfileScreen() {
       ],
     },
   ];
+
   const { tabs, items } = useMemo(() => {
     return {
       tabs: SECTIONS.map(({ header }) => ({
@@ -104,10 +107,7 @@ export default function ProfileScreen() {
               // handle onPress
             }}>
             <View style={{ ...styles.profileAction, backgroundColor: isDarkMode ? darkColors.button : lightColors.button }}>
-
               <Text style={{ ...styles.profileActionText, color: palette.primary }}>Log out</Text>
-
-
               <Ionicons color={palette.primary} name="exit" size={16} />
             </View>
           </TouchableOpacity>
@@ -118,7 +118,7 @@ export default function ProfileScreen() {
       <ScrollView>
         <View style={styles.content}>
           <View style={styles.tabs}>
-            {tabs.map(({ name }: any, index) => {
+            {tabs?.map(({ name }: any, index) => {
               const isActive = index === value;
 
               return (
@@ -150,7 +150,7 @@ export default function ProfileScreen() {
             })}
           </View>
 
-          {items.map(({ label, type, value, notification }: any, index) => (
+          {items?.map(({ label, type, value, notification }: any, index) => (
             <View
               key={label}
               style={[

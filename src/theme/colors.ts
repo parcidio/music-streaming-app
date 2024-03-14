@@ -44,7 +44,7 @@ export const palette = {
   warning800: "#938405",
   warning900: "#7A6C03",
 
-  grey: "F3EFF6",
+  grey: "#F3EFF6",
 
   redalternative: "#DA324B"
 };

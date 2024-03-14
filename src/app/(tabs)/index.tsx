@@ -50,7 +50,7 @@ const HomeScreen = () => {
       <SearchBox search={search} setSearch={setSearch} showProfile={true} />
       {/* </View> */}
 
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/* Trending */}
         <Header heading={"Tendências"} link={"/hits"} linkText={"Mais"} showLink={true} />
 
@@ -59,13 +59,13 @@ const HomeScreen = () => {
         <Header heading={"Generos"} link={"/menus"} linkText={"Mais"} showLink={true} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {genre.map((item) => (
-            <Link href="/" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <GenreCard title={item.title} />
-                )}
-              </Pressable>
-            </Link>
+            // <Link href="/" asChild>
+            // <Pressable>
+            //   {({ pressed }) => (
+            <GenreCard title={item.title} />
+            //     )}
+            //   </Pressable>
+            // </Link>
           ))}
         </ScrollView>
         {/* Os Top Artistas */}
@@ -86,6 +86,7 @@ const HomeScreen = () => {
         <Header heading={"Novos lançamentos"} link={"/newReleases"} linkText={"Mais"} showLink={true} />
 
         <FlatList
+          scrollEnabled={false}
           data={tracks}
           renderItem={({ item }) => <TrackListItem track={item} />}
         />

@@ -34,7 +34,7 @@ const CustomLocalProvider: React.FC<LocalProviderProps> = ({ children }) => {
                 }
                 if (storedLanguage !== null) {
                     const parsedStoredLanguage = JSON.parse(storedLanguage);
-                    setLocal(parsedStoredLanguage);
+                    setLanguage(parsedStoredLanguage);
                     console.log("parsedStoredLanguage: ", parsedStoredLanguage);
                 }
             } catch (error) {

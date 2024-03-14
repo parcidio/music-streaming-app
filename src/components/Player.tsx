@@ -22,7 +22,7 @@ const Player = () => {
     return null;
   }
 
-  const image = currentTrack.album.images?.[0];
+  const image = currentTrack?.album?.images?.[0];
 
   const [sound, setSound] = useState<Sound>();
   const [isPlaying, setIsPlaying] = useState(false);
@@ -93,16 +93,16 @@ const Player = () => {
 
         <View style={styles.player}>
           <Pressable
-            onPress={() => {
-              setPlayerFullScreen(true)
-              console.log("fullscreen")
-            }}
+          // onPress={() => {
+          //   setPlayerFullScreen(true)
+          //   console.log("fullscreen")
+          // }}
           >
             {image && <Image source={{ uri: image.url }} style={styles.image} />}
           </Pressable>
           <View style={{ flex: 1 }}>
-            <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{currentTrack.name}</Text>
-            <Text style={styles.subtitle} numberOfLines={1} ellipsizeMode="tail">{currentTrack.artists[0]?.name}</Text>
+            <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{currentTrack?.name}</Text>
+            <Text style={styles.subtitle} numberOfLines={1} ellipsizeMode="tail">{currentTrack?.artists[0]?.name}</Text>
             <View style={styles.progressBar} />
 
           </View>
@@ -114,7 +114,7 @@ const Player = () => {
             style={{ marginHorizontal: 10 }}
           />
           <Ionicons
-            onPress={onPause}
+            onPress={() => onPause}
             disabled={!currentTrack?.preview_url}
             name={isPlaying ? 'pause' : 'play'}
             size={22}
@@ -126,7 +126,7 @@ const Player = () => {
 
 
       {playerFullScreen && (
-        <FullPlayer onPause={onPause} playerFullScreen={playerFullScreen} setPlayerFullScreen={setPlayerFullScreen} isPlaying={isPlaying} setIsPlaying={setIsPlaying} currentTrack={currentTrack} />
+        <FullPlayer onPause={() => onPause} playerFullScreen={playerFullScreen} setPlayerFullScreen={setPlayerFullScreen} isPlaying={isPlaying} setIsPlaying={setIsPlaying} currentTrack={currentTrack} />
       )}
     </>
   );

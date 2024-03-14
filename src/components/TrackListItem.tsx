@@ -6,8 +6,8 @@ import { useTheme } from "../providers/CustomThemeContext";
 import { darkColors, lightColors } from "../theme";
 
 export default function TrackListItem({ track }: TrackListItemProps) {
-  const image = track.album?.images?.[0];
   const { currentTrack, setCurrentTrack } = usePlayerContext();
+  const image = track.album?.images?.[0];
 
   const { isDarkMode } = useTheme();
 
@@ -18,7 +18,7 @@ export default function TrackListItem({ track }: TrackListItemProps) {
     >
       {image && <Image source={{ uri: image.url }} style={styles.image} />}
       <View style={styles.containerActive}>
-        <Text style={{ ...styles.title, color: isDarkMode ? darkColors.text : lightColors.mutedText }}
+        <Text style={{ ...styles.title, color: isDarkMode ? darkColors.mutedText : lightColors.text }}
           numberOfLines={1} ellipsizeMode="tail">{track.name}</Text>
         <Text style={{ ...styles.subtitle, color: isDarkMode ? darkColors.mutedText : lightColors.text }}>{track.artists[0]?.name}</Text>
       </View>
