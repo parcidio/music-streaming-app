@@ -58,11 +58,11 @@ const HomeScreen = () => {
         {/* Generos */}
         <Header heading={"Generos"} link={"/menus"} linkText={"Mais"} showLink={true} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {genre.map((item) => (
+          {genre.map((item, index) => (
             // <Link href="/" asChild>
             // <Pressable>
             //   {({ pressed }) => (
-            <GenreCard title={item.title} />
+            <GenreCard title={item.title} key={index} />
             //     )}
             //   </Pressable>
             // </Link>
@@ -88,7 +88,7 @@ const HomeScreen = () => {
         <FlatList
           scrollEnabled={false}
           data={tracks}
-          renderItem={({ item }) => <TrackListItem track={item} />}
+          renderItem={({ item, index }) => <TrackListItem track={item} key={index} />}
         />
       </ScrollView>
     </SafeAreaView>

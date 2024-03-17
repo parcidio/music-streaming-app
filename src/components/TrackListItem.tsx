@@ -7,20 +7,23 @@ import { darkColors, lightColors } from "../theme";
 
 export default function TrackListItem({ track }: TrackListItemProps) {
   const { currentTrack, setCurrentTrack } = usePlayerContext();
-  const image = track.album?.images?.[0];
+  const image = track?.album?.images?.[0];
 
   const { isDarkMode } = useTheme();
+  function onplay() {
+    return setCurrentTrack(track)
+  }
 
   return (
     <Pressable
-      onPress={() => setCurrentTrack(track)}
+      onPress={onplay}
       style={styles.container}
     >
-      {image && <Image source={{ uri: image.url }} style={styles.image} />}
+      {image && <Image source={{ uri: image?.url }} style={styles.image} />}
       <View style={styles.containerActive}>
         <Text style={{ ...styles.title, color: isDarkMode ? darkColors.mutedText : lightColors.text }}
-          numberOfLines={1} ellipsizeMode="tail">{track.name}</Text>
-        <Text style={{ ...styles.subtitle, color: isDarkMode ? darkColors.mutedText : lightColors.text }}>{track.artists[0]?.name}</Text>
+          numberOfLines={1} ellipsizeMode="tail">{track?.name}</Text>
+        <Text style={{ ...styles.subtitle, color: isDarkMode ? darkColors.mutedText : lightColors.text }}>{track?.artists[0]?.name}</Text>
       </View>
     </Pressable>
   );

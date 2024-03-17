@@ -32,7 +32,7 @@ const FullPlayer = ({ playerFullScreen, setPlayerFullScreen, isPlaying, onPause,
 
 
 
-    const image = currentTrack.album.images?.[0];
+    const image = currentTrack?.album?.images?.[0];
 
 
     return (
@@ -114,7 +114,7 @@ const FullPlayer = ({ playerFullScreen, setPlayerFullScreen, isPlaying, onPause,
                                     {currentTrack?.name}
                                 </Text>
                                 <Text style={{ color: "#D3D3D3", marginTop: 4 }}>
-                                    {currentTrack?.artists[0].name}
+                                    {currentTrack?.artists[0]?.name}
                                 </Text>
                             </View>
 

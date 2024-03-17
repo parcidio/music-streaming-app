@@ -11,6 +11,7 @@ import { BottomTabBar } from '@react-navigation/bottom-tabs'
 import Player from '@/src/components/Player';
 import { useTheme } from '@/src/providers/CustomThemeContext';
 import { darkColors, lightColors } from '@/src/theme';
+import { usePlayerContext } from '@/src/providers/PlayerProvider';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 export function TabBarIcon(props: {
@@ -23,7 +24,6 @@ export function TabBarIcon(props: {
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { isDarkMode, toggleTheme } = useTheme();
-
 
   return (
     <Tabs

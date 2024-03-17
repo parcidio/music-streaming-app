@@ -94,7 +94,7 @@ const HomeBanner: React.FC<HomeBannerProps> = ({ items, pagination, autoPlay = f
           })
 
           if (!item.image) {
-            return <View style={{ width: spaceSize }} />
+            return <View style={{ width: spaceSize }} key={index} />
           }
           return (
             <View style={{ width: containerSize }} key={index}>

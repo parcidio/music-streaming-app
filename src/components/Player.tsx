@@ -11,11 +11,11 @@ import RecentlyPlayedCard from "./AlbumCard";
 import TrackListItem from './TrackListItem';
 import ArtistCard from './ArtistCard';
 import FullPlayer from './fullPlayer'
+import { Track } from '@/assets/types';
 
 
 const Player = () => {
   const { currentTrack } = usePlayerContext();
-
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
 
   if (!currentTrack) {
@@ -34,7 +34,7 @@ const Player = () => {
 
   const playTrack = async () => {
     if (sound) {
-      await sound.unloadAsync();
+      await sound?.unloadAsync();
     }
 
     if (!currentTrack?.preview_url) {
@@ -42,21 +42,21 @@ const Player = () => {
     }
 
     const { sound: newSound } = await Audio.Sound.createAsync({
-      uri: currentTrack.preview_url,
+      uri: currentTrack?.preview_url,
     });
     setSound(newSound);
-    newSound.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate)
-    await newSound.playAsync();
+    newSound?.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate)
+    await newSound?.playAsync();
   };
 
   const onPlayBackStatusUpdate = (status: AVPlaybackStatus) => {
     // this function is useful to interuct with the song being play, including allowing us to get the 'durationMillis' for the song progress bar
     console.log('status: ', status)
-    if (!status.isLoaded) {
+    if (!status?.isLoaded) {
       return
     }
 
-    setIsPlaying(status.isPlaying);
+    setIsPlaying(status?.isPlaying);
   }
   const onPause = async () => {
     if (!sound) {
@@ -64,22 +64,22 @@ const Player = () => {
     }
 
     if (isPlaying) {
-      await sound.pauseAsync();
+      await sound?.pauseAsync();
     } else {
-      await sound.playAsync()
+      await sound?.playAsync()
     }
     setIsPlaying(!isPlaying);
 
   }
 
   const playNextTrack = () => {
-    const nextIndex = (currentTrackIndex + 1) % tracks.length;
+    const nextIndex = (currentTrackIndex + 1) % tracks?.length;
     setCurrentTrackIndex(nextIndex);
   };
 
   const playPrevTrack = () => {
     const prevIndex =
-      (currentTrackIndex - 1 + tracks.length) % tracks.length;
+      (currentTrackIndex - 1 + tracks?.length) % tracks?.length;
     setCurrentTrackIndex(prevIndex);
   };
 
@@ -93,12 +93,12 @@ const Player = () => {
 
         <View style={styles.player}>
           <Pressable
-          // onPress={() => {
-          //   setPlayerFullScreen(true)
-          //   console.log("fullscreen")
-          // }}
+            onPress={() => {
+              setPlayerFullScreen(true)
+              console.log("fullscreen")
+            }}
           >
-            {image && <Image source={{ uri: image.url }} style={styles.image} />}
+            {image && <Image source={{ uri: image?.url }} style={styles?.image} />}
           </Pressable>
           <View style={{ flex: 1 }}>
             <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{currentTrack?.name}</Text>
@@ -113,13 +113,24 @@ const Player = () => {
             color={'white'}
             style={{ marginHorizontal: 10 }}
           />
-          <Ionicons
+          <Pressable
+            style={({ pressed }) => ({
+              opacity: pressed ? 0.5 : 1, // Adjust the opacity when pressed
+
+            })}
+            // onPress={() => console.log("playe/pause")}
             onPress={() => onPause}
-            disabled={!currentTrack?.preview_url}
-            name={isPlaying ? 'pause' : 'play'}
-            size={22}
-            color={currentTrack?.preview_url ? 'white' : 'gray'}
-          />
+          >
+
+            <Ionicons
+
+              disabled={!currentTrack?.preview_url}
+              name={isPlaying ? 'pause' : 'play'}
+              size={22}
+              color={currentTrack?.preview_url ? 'white' : 'gray'}
+            />
+          </Pressable>
+
         </View>
       </View>
 
