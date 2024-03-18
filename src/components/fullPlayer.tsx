@@ -125,6 +125,7 @@ const FullPlayer = () => {
                                             overflow: 'hidden', // To clip the child view (progress bar)
                                         }}>
                                         <View
+                                            // progress bar to track the progress of the sound
                                             style={{
                                                 width: `${progress}%`,
                                                 height: '100%',
