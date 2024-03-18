@@ -1,4 +1,6 @@
+import { AVPlaybackStatusSuccess } from "expo-av/build/AV.types";
 import { LinkProps } from "expo-router";
+import { Dispatch, SetStateAction } from "react";
 
 export type Track = {
   id: string;
@@ -26,7 +28,16 @@ export type Image = {
 
 export type PlayerContextType={
   currentTrack?: Track;
+  playerFullScreen?: boolean,
+  isPlaying?: boolean,
   setCurrentTrack: (currentTrack:Track)=> void;
+  setCurrentTrackIndex: Dispatch<SetStateAction<number>>,
+  setIsPlaying: Dispatch<SetStateAction<boolean>>,
+  setPlayerFullScreen: Dispatch<SetStateAction<boolean>>,
+  playPrevTrack: ()=> void,
+  playNextTrack: ()=> void,
+  onPause: ()=>void
+  soundStatus?: AVPlaybackStatusSuccess,
 }
 
 export type TrackListItemProps = {

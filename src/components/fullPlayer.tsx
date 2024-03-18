@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Pressable, ScrollView, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import { AntDesign, Entypo, Feather, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { usePlayerContext } from '../providers/PlayerProvider';
 import React, { useEffect, useState } from 'react';
@@ -16,187 +16,168 @@ import { Callback } from '@react-native-async-storage/async-storage/lib/typescri
 import { Feather as Icon } from "@expo/vector-icons";
 import { darkColors, palette } from '../theme';
 
-interface FullPlayerProps {
-    playerFullScreen: boolean,
-    setPlayerFullScreen: CallableFunction,
-    setIsPlaying: CallableFunction,
-    isPlaying: boolean,
-    currentTrack: Track,
-    onPause: () => void,
 
-}
-
-const FullPlayer = ({ playerFullScreen, setPlayerFullScreen, isPlaying, onPause, setIsPlaying, currentTrack }: FullPlayerProps) => {
-
-
-
-
-
+const FullPlayer = () => {
+    const { currentTrack, playerFullScreen, setPlayerFullScreen, playPrevTrack, playNextTrack, onPause, isPlaying, setIsPlaying, soundStatus } = usePlayerContext();
     const image = currentTrack?.album?.images?.[0];
-
-
+    let progress = (soundStatus!.positionMillis / soundStatus!.positionMillis) * 100
     return (
-        <BottomModal
-            visible={playerFullScreen}
-            onDismiss={() => setPlayerFullScreen(false)}
-            swipeDirection={["down"]}
-            onSwiping={() => setPlayerFullScreen(false)}
-            swipeThreshold={200}
+        <>
 
-        >
-            <ModalContent
-                style={{ height: "100%", width: "100%", backgroundColor: "black" }}
+
+            <BottomModal
+                visible={playerFullScreen}
+                onDismiss={() => setPlayerFullScreen(false)}
+                swipeDirection={["down"]}
+                onSwiping={() => setPlayerFullScreen(false)}
+                swipeThreshold={200}
+
             >
-                {/* <ScrollView showsVerticalScrollIndicator={true}> */}
 
-                <View style={{ height: "100%", width: "100%", marginTop: 40 }}>
+                <ModalContent
+                    style={{ height: "100%", width: "100%", backgroundColor: "black" }}
+                >
 
-                    <View
-                        style={{
-                            flexDirection: "row",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <Pressable
-                            onPress={() => { setPlayerFullScreen(false) }}
-                            style={({ pressed }) => ({
 
-                                opacity: pressed ? 0.5 : 1, // Adjust the opacity when pressed
-                            })}
-                        >
-
-                            <AntDesign
-
-                                name="menu-unfold"
-                                size={24}
-                                color="white"
-                            />
-                        </Pressable>
+                    {/* <ScrollView showsVerticalScrollIndicator={true}> */}
+                    <View style={{ height: "100%", width: "100%", marginTop: 40 }}>
 
                         <View
                             style={{
-                                backgroundColor: palette.primary,
-                                width: 50, height: 4,
-                                borderRadius: 50,
-                                marginVertical: 20
-                            }}
-                        />
-                        <Entypo name="dots-three-vertical" size={24} color="white" />
-
-                    </View>
-
-
-
-                    <View style={{ height: 30 }} />
-
-                    <View style={{ padding: 10 }}>
-                        <Image
-                            style={{ width: "100%", height: 330, borderRadius: 10 }}
-                            source={{ uri: image.url }}
-                        />
-                        <View
-                            style={{
-                                marginTop: 10,
                                 flexDirection: "row",
+                                alignItems: "center",
                                 justifyContent: "space-between",
                             }}
                         >
-                            <View>
-                                <Text
-
-                                    style={{
-                                        color: "white", fontWeight: '500',
-
-                                        fontSize: 16,
-                                    }}
-                                >
-                                    {currentTrack?.name}
-                                </Text>
-                                <Text style={{ color: "#D3D3D3", marginTop: 4 }}>
-                                    {currentTrack?.artists[0]?.name}
-                                </Text>
-                            </View>
-
-                            <AntDesign name="heart" size={24} color="red" />
-                        </View>
-
-                        <View style={{ marginTop: 10 }}>
-                            <View
-                                style={{
-                                    width: "100%",
-                                    marginTop: 10,
-                                    height: 3,
-                                    backgroundColor: "gray",
-                                    borderRadius: 5,
-                                }}
-                            >
-                                <View
-                                    style={{
-                                        ...styles.progressBar,
-                                        width: `${5 * 100}%`,
-                                    }}
-                                />
-                                <View
-                                    style={[
-                                        {
-                                            position: "absolute",
-                                            top: -5,
-                                            width: 20,
-                                            height: 20,
-                                            borderRadius: 20 / 2,
-                                            backgroundColor: "white",
-                                        },
-                                        {
-                                            left: `${5 * 100}%`,
-                                            marginLeft: -20 / 2,
-                                        },
-                                    ]}
-                                />
-                            </View>
-
-                        </View>
-
-                        <View style={{
-                            marginTop: 12,
-                            flexDirection: "row",
-                            justifyContent: "space-evenly",
-                            alignItems: "center",
-                            paddingBottom: 80
-                        }}>
-                            <Icon name="shuffle" color="rgba(255, 255, 255, 0.5)" size={24} />
-                            <AntDesign name="stepbackward" color="white" size={32} />
                             <Pressable
+                                onPress={onPause}
                                 style={({ pressed }) => ({
+
                                     opacity: pressed ? 0.5 : 1, // Adjust the opacity when pressed
-
-                                    width: 60,
-                                    height: 60,
-                                    borderRadius: 40,
-                                    backgroundColor: "red",
-                                    justifyContent: "center",
-                                    alignItems: "center",
                                 })}
-                                onPress={() => console.log("playe/pause")}
-
                             >
-                                <Ionicons
 
-                                    disabled={!currentTrack?.preview_url}
-                                    name={isPlaying ? 'pause' : 'play'}
-                                    size={22}
-                                    color={currentTrack?.preview_url ? 'black' : 'gray'}
+                                <AntDesign
+
+                                    name="menu-unfold"
+                                    size={24}
+                                    color="white"
                                 />
                             </Pressable>
-                            <AntDesign name="stepforward" color="white" size={32} />
-                            <Icon name="repeat" color="rgba(255, 255, 255, 0.5)" size={24} />
+
+                            <View
+                                style={{
+                                    backgroundColor: palette.primary,
+                                    width: 50, height: 4,
+                                    borderRadius: 50,
+                                    marginVertical: 20
+                                }}
+                            />
+                            <Entypo name="dots-three-vertical" size={24} color="white" />
+
+                        </View>
+
+
+
+                        <View style={{ height: 30 }} />
+
+                        <View style={{ padding: 10 }}>
+                            <Image
+
+                                style={{ width: "100%", height: 330, borderRadius: 10 }}
+                                source={{ uri: image?.url }}
+                            />
+                            <View
+                                style={{
+                                    marginTop: 10,
+                                    flexDirection: "row",
+                                    justifyContent: "space-between",
+                                }}
+                            >
+                                <View>
+                                    <Text
+
+                                        style={{
+                                            color: "white", fontWeight: '500',
+
+                                            fontSize: 16,
+                                        }}
+                                    >
+                                        {currentTrack?.name}
+                                    </Text>
+                                    <Text style={{ color: "#D3D3D3", marginTop: 4 }}>
+                                        {currentTrack?.artists[0]?.name}
+                                    </Text>
+                                </View>
+
+                                <AntDesign name="heart" size={24} color="red" />
+                            </View>
+
+                            <View style={{ marginTop: 10 }}>
+
+                                <View style={{ marginTop: 10 }}>
+                                    <View
+                                        style={{
+                                            width: '100%',
+                                            height: 3,
+                                            backgroundColor: 'gray',
+                                            borderRadius: 5,
+                                            overflow: 'hidden', // To clip the child view (progress bar)
+                                        }}>
+                                        <View
+                                            style={{
+                                                width: `${progress}%`,
+                                                height: '100%',
+                                                backgroundColor: 'white',
+                                            }}
+                                        />
+                                    </View>
+                                </View>
+
+
+                            </View>
+
+                            <View style={{
+                                marginTop: 12,
+                                flexDirection: "row",
+                                justifyContent: "space-evenly",
+                                alignItems: "center",
+                                paddingBottom: 80
+                            }}>
+                                <Icon name="shuffle" color="rgba(255, 255, 255, 0.5)" size={24} />
+                                <AntDesign name="stepbackward" color="white" size={32} />
+
+
+                                <Pressable
+                                    style={({ pressed }) => ({
+                                        opacity: pressed ? 0.5 : 1, // Adjust the opacity when pressed
+                                        width: 60,
+                                        height: 60,
+                                        borderRadius: 40,
+                                        backgroundColor: "red",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                    })}
+                                    onPressIn={onPause}
+                                >
+                                    <Ionicons
+
+                                        disabled={!currentTrack?.preview_url}
+                                        name={isPlaying ? 'pause' : 'play'}
+                                        size={22}
+                                        color={currentTrack?.preview_url ? 'black' : 'gray'}
+                                    />
+                                </Pressable>
+                                <AntDesign name="stepforward" color="white" size={32} />
+                                <Icon name="repeat" color="rgba(255, 255, 255, 0.5)" size={24} />
+                            </View>
                         </View>
                     </View>
-                </View>
 
-                {/* </ScrollView> */}
-            </ModalContent>
-        </BottomModal>
+                    {/* </ScrollView> */}
+                </ModalContent>
+            </BottomModal >
+        </>
     )
 }
 const styles = StyleSheet.create({
